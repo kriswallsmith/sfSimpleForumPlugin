@@ -1,5 +1,7 @@
 == Trunk ==
 
+== 2007-09-25 | 0.6.2 Beta ==
+
  * francois: Improved security and credentials handling
  * francois: [Break BC] Added a new topic table 
  * francois: [Break BC] Refactored most of the code to be more extensible, performant and readable
@@ -15,7 +17,7 @@
  * francois: Added unit tests for forum and topic calculated fields
  * francois: Fixed forum and topic calculated fields
  
-== 0.6.1 Beta ==
+== 2007-09-07 | 0.6.1 Beta ==
 
  * francois: Optimized calculated fields in model
  * beleneglorion: Added sticky topic feature
