@@ -1,0 +1,53 @@
+<?php use_helper('Date') ?>
+<tr>
+  <td class="thread_name">
+    
+    <?php if ($topic->getIsSticked()): ?>
+      <?php echo image_tag('/sfSimpleForumPlugin/images/note.png', array(
+        'align' => 'absbottom',
+        'alt'   => __('Sticked topic'),
+        'title' => __('Sticked topic')
+      )) ?>
+    <?php endif; ?>
+    <?php if ($topic->getIsLocked()): ?>
+      <?php echo image_tag('/sfSimpleForumPlugin/images/lock.png', array(
+        'align' => 'absbottom',
+        'alt'   => __('Locked topic'),
+        'title' => __('Locked topic')
+      )) ?>
+    <?php endif; ?>
+    <?php if (!$topic->getIsLocked() && !$topic->getIsSticked()): ?>
+      <?php $image = $topic->getNbReplies() ? 'comments' : 'comment'  ?>
+      <?php echo image_tag('/sfSimpleForumPlugin/images/'.$image.'.png', array(
+        'align' => 'absbottom'
+      )) ?>
+    <?php endif; ?>
+    
+    <?php echo link_to(
+      $topic->getTitle(),
+      'sfSimpleForum/topic?id='.$topic->getId().'&stripped_title='.$topic->getStrippedTitle(),
+      array('class' => $topic->getIsNew() ? 'new' : '')) ?>
+      
+    <?php if ($sf_user->hasCredential('moderator')): ?>
+    <ul class="post_actions">
+      <li><?php echo link_to(__('Delete'), 'sfSimpleForum/deleteTopic?id='.$topic->getId()) ?></li>
+    </ul>
+    <?php endif; ?>
+    
+  </td>
+  <td class="thread_replies"><?php echo $topic->getNbReplies() ?></td>
+
+  <?php if (sfConfig::get('app_sfSimpleForumPlugin_count_views', true)): ?>
+  <td class="thread_views"><?php echo $topic->getNbViews() ?></td>
+  <?php endif; ?>
+
+  <td class="thread_recent">
+    <?php $message_link = $topic->getNbPosts() ? __('Last reply') : __('Posted') ?>
+      
+    <?php echo $message_link . ' ' . __('%date% ago by %author%', array(
+      '%date%'   => distance_of_time_in_words($topic->getsfSimpleForumPost()->getCreatedAt('U')),
+      '%author%' => link_to($topic->getsfSimpleForumPost()->getAuthorName(), 'sfSimpleForum/latestUserPosts?username='.$topic->getsfSimpleForumPost()->getAuthorName())
+      )) ?>
+  </td>
+
+</tr>

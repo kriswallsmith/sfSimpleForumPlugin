@@ -1,0 +1,137 @@
+sfGuardPermission:
+  moderator:
+    name: moderator
+
+sfGuardUser:
+  johndoe:
+    username:       johndoe
+    password:       johndoe
+  tarzanman:
+    username:       tarzanman
+    password:       tarzanman
+  testuser:
+    username:       testuser
+    password:       testuser
+    
+sfGuardUserPermission:
+  testuser_is_moderator:
+    user_id:        testuser
+    permission_id:  moderator
+    
+sfSimpleForumCategory:
+  c1:
+    name:        Public Boards
+    description: We talk about stuff here.
+    rank:        1
+  c2:
+    name:        Miscellaneous
+    description: Secret matters
+    rank:        2
+
+sfSimpleForumForum:
+  f1:
+    name:        Foo discussion
+    description: Everybody is foo here
+    category_id: c1
+    rank:        1
+  f2:
+    name:        Bar discussion
+    description: If you want a bar, this is where you will find it
+    category_id: c1
+    rank:        2
+  f3:
+    name: General discussion
+    description: "If you don't know where to write, try here"
+    category_id: c2
+
+sfSimpleForumTopic:
+  topic_1:
+    title:       Installing foo
+    forum_id:    f1
+  topic_2:
+    title:       Bringing foo along
+    forum_id:    f1
+  topic_3:
+    title:       Foo forever
+    forum_id:    f1
+  topic_4:
+    title:       Chocolate bar
+    forum_id:    f2
+  topic_5:
+    title:       Energy bar
+    forum_id:    f2
+  topic_6:
+    title:       Stick Moo
+    forum_id:    f2
+    is_sticked: true
+  topic_7:
+    title:       Output Escaping
+    forum_id:    f3
+
+
+sfSimpleForumPost:
+  post_1:
+    topic_id:    topic_1
+    content: |
+      When I install foo, it just <b>doesn't work</b>.<br />What did I do wrong?
+    user_id:     tarzanman
+  post_2:
+    topic_id:    topic_1
+    content: |
+      Did you clear the cache? I don't know what that means, but it often helps...<br/>Or so they say!
+    user_id:     johndoe
+  post_3:
+    topic_id:    topic_1
+    content: |
+      Yes, I did that. Something else?
+    user_id:     tarzanman
+  post_4:
+    topic_id:    topic_1
+    content: |
+      No, you're hopeless
+    user_id:     johndoe
+  post_5:
+    topic_id:    topic_2
+    content: |
+      I often go out, and I'd like to take my foo with me.<br/>
+      Would you advise against it?<br/>
+      Some say a foo should not be let outside...
+    user_id:     tarzanman
+  post_6:
+    topic_id:    topic_3
+    content: |
+      Everybody wants kung foo fighting
+    user_id:     johndoe
+  post_7:
+    topic_id:    topic_3
+    content: |
+      Man, I was about to say it
+    user_id:     tarzanman
+  post_8:
+    topic_id:    topic_4
+    content: |
+      Isn't the chocolate bar the best of all bars?
+    user_id:    tarzanman
+  post_9:
+    topic_id:    topic_5
+    content: |
+      I need some energy...
+    user_id:    tarzanman
+  post_10:
+    topic_id:    topic_6
+    content: |
+      This is a sample sticked topic. It should be on top of the topic list, 
+      even though more recent topics exist. 
+      Only users with moderator privilege can stick or unstick it (testuser is a moderator).
+    user_id:    testuser
+  post_11:
+    topic_id:    topic_4
+    content: |
+      I forgot to say: I need a bar
+    user_id:    tarzanman
+  post_12:
+    topic_id:    topic_7
+    content: |
+      If you see no alert, it means that your output escaping is turned on<br>
+      <script>alert('you should turn output escaping on to prevent XSS attacks')</script>
+    user_id:    tarzanman

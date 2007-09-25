@@ -1,0 +1,204 @@
+= sfSimpleForumplugin - Bulletin Board / Forum for symfony =
+
+== Overview ==
+
+This plugin allows you to embed a forum within your symfony application with the following features:
+  - Topics are grouped into forums, forums are grouped into categories
+  - Topics are flat (= not threaded)
+  - Breadcrumb navigation
+  - Pagination
+  - Lists of latest messages are available for all forums, one forum, one user
+  - RSS feeds (requires sfFeed2Plugin)
+  - Identified users can participate in any topic and submit new messages
+  - User management is controlled through [wiki:sfGuardPlugin]
+  - Basic moderation (delete, stick or lok a topic)
+  - View count for topics and forums
+  - New messages since last visit shown as such
+  - Uses output escaping to prevent XSS attacks
+  - i18n ready
+
+It is not aimed at replacing full-featured forum packages, but offers a lightweight alternative for when you build a website that has to contain a forum section. It is voluntarily simple, and contains many optimizations so that is remains fast even with a lot of messages and concurrent users. It is very easy to configure and adapt, so it should fulfill most basic forum requirements.
+
+Please note that this plugin is in active development. If you want to help and improve it, please contact François Zaninotto.
+
+== Screenshots ==
+
+[[Image(sfSimpleForum_1.gif, 30%)]]  
+[[Image(sfSimpleForum_2.gif, 30%)]]  
+[[Image(sfSimpleForum_3.gif, 30%)]] 
+
+== Requirements ==
+
+The prerequisites for using the `sfSimpleForum` plugin are:
+ - As the plugin doesn't contain a user management module, the project where you install it must have a table managing authors, or users (whatever the name), and the related Propel class must have a `__toString()` method. Both these conditions are satisfied by the [http://trac.symfony-project.com/trac/wiki/sfFeed2Plugin sfGuardPlugin], so installing this plugin is a good choice.
+ - If you want to use RSS feeds, you must install the [http://trac.symfony-project.com/trac/wiki/sfFeed2Plugin sfFeed2Plugin].
+ 
+To install the plugin for a symfony project, the usual process is to use the symfony command line:
+{{{
+$ php symfony plugin-install http://plugins.symfony-project.com/sfSimpleForumPlugin
+}}}
+
+Alternatively, if you don't have PEAR installed, you can download the latest package attached to this plugin's wiki page and extract it under your project's `plugins/` directory. You will also have to copy the contents of the `myproject/plugins/sfSimpleForumPlugin/web/` directory into a `myproject/web/sfSimpleForumPlugin/` directory.
+
+Rebuild the model, generate the SQL code for the new tables and insert it into your database:
+{{{
+$ php symfony propel-build-all
+}}}
+
+Clear the cache to enable the autoloading to find the new classes:
+{{{
+$ php symfony cc
+}}}
+
+You can load the included fixtures to start using the forum with test data.
+{{{
+$ php symfony propel-load-data frontend plugins\sfSimpleForumPlugin\data\fixtures
+}}}
+
+Enable the new `sfSimpleForum`  module in your application, via the `settings.yml` file.
+{{{
+// in myproject/apps/frontend/config/settings.yml
+all:
+  .settings:
+    enabled_modules:        [default, sfSimpleForum]
+}}}
+
+Start using the plugin by browsing to the frontend module's default page:
+{{{ 
+http://myproject/frontend_dev.php/sfSimpleForum
+}}}
+
+== Slots ==
+
+The templates of the `sfSimpleForum` module define some slots that you cna use inside your layout:
+  - auto_discovery_link_tag: For the auto discovery links, to be placed in the `<head>` section
+  - forum_navigation: For the forum breadcrumb and actions
+
+An example layout for a standard display is given below.
+
+{{{
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<?php include_http_metas() ?>
+<?php include_metas() ?>
+
+<?php include_title() ?>
+<?php include_slot('auto_discovery_link_tag') ?>
+
+<link rel="shortcut icon" href="/favicon.ico" />
+
+</head>
+<body>
+
+<div class="sfSimpleForum">
+  <?php include_slot('forum_navigation') ?>
+</div>
+
+<?php echo $sf_data->getRaw('sf_content') ?>
+
+</body>
+</html>
+}}}
+
+== Configuration ==
+
+=== app.yml ===
+
+Some of the features of the plugin can be altered by configuration. To do so, add some of the following lines to your application's `app.yml`:
+
+{{{
+all:
+  sfSimpleForumPlugin:
+    forum_name:             My symfony forum
+    display_categories:     true
+    use_feeds:              true  # requires sfFeed2Plugin
+    count_views:            true  # count each time a topic is viewed. Turn off to increase performance
+    max_per_block:          10    # maximum number of links displayed in a block
+    include_breadcrumb:     true  # include breadcrumb slot content. Turn off if you don't use the breadcrumb.
+    breadcrumb_separator:   ' » ' # separator for breadcrumb trail
+    max_per_page:           10    # maximum threads or messages per page
+    pages_displayed:        5     # maximum pages displayed by the pager navigation
+    feed_max:               10    # maximum messages served by feed
+    show_author_details:    false # display number of messages of post authors
+}}}
+
+=== Routing rules ===
+
+The plugin doesn't come with any routing rule. However, you can add some of your own to make the URLs look nicer. An example of set of rules could be as follows:
+
+{{{
+forum_home: 
+  url:   /forum
+  param: { module: sfSimpleForum, action: forumList }
+
+forum_latest_messages: 
+  url:   /forum/latest/:page
+  param: { module: sfSimpleForum, action: latestPosts, page: 1 }
+  requirements: { page: \d+ }
+
+forum_latest_messages_feed: 
+  url:   /forum/latest/feed
+  param: { module: sfSimpleForum, action: latestPostsFeed }
+  
+forum_forum: 
+  url:   /forum/:forum_name/:page
+  param: { module: sfSimpleForum, action: forum, page: 1 }
+  requirements: { page: \d+ }
+
+forum_latest_messages_for_forum: 
+  url:   /forum/:forum_name/latest/:page
+  param: { module: sfSimpleForum, action: latestForumPosts, page: 1 }
+  requirements: { page: \d+ }
+
+forum_latest_messages_for_forum_feed: 
+  url:   /forum/:forum_name/latest/feed
+  param: { module: sfSimpleForum, action: latestForumPostsFeed }
+
+forum_topic: 
+  url:   /forum/topic/:id/:stripped_title/:page
+  param: { module: sfSimpleForum, action: topic, page: 1 }
+  requirements: { page: \d+ }
+
+forum_topic_feed:
+  url:   /forum/topic/:id/:stripped_title/feed
+  param: { module: sfSimpleForum, action: topicFeed }
+
+forum_new_topic:
+  url:   /forum/new_topic/:forum_name
+  param: { module: sfSimpleForum, action: createTopic }
+
+forum_latest_messages_by_user: 
+  url:   /forum/user/:username/:page
+  param: { module: sfSimpleForum, action: latestUserPosts, page: 1 }
+  requirements: { page: \d+ }
+
+forum_latest_messages_by_user_feed: 
+  url:   /forum/user/:username/rss
+  param: { module: sfSimpleForum, action: latestUserPostsFeed }
+  
+forum_post: 
+  url:   /forum_message/:id
+  param: { module: sfSimpleForum, action: post }
+}}}
+
+=== Look and Feel ===
+
+The `sfSimpleForum` module comes with a default stylesheet. You can choose to use your own stylesheet instead of the default one. To do so, you must create an empty `sfSimpleForum` module inside your application with just one `config/view.yml` file in it, with the followin content:
+
+{{{
+all:
+  stylesheets: [-/sfSimpleForumPlugin/css/default.css, myCustomStylesheet]
+}}}
+
+== TODO ==
+
+ * Report message to moderator, list of reported messages
+ * Moderators can move a topic to another forum and a message to another topic
+ * Add images to make the default style less ugly
+ * Search engine
+ * Subscribe to a topic by email
+ * Make the plugin sfGuard-independent (cf sfSimpleBlogPlugin)
+ * Forum administration (module to create and arrange forums and categories)
+ * Package with other plugins into an application

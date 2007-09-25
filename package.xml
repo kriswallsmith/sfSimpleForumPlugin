@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.4.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" 
+xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd 
+http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>sfSimpleForumPlugin</name>
+ <channel>pear.symfony-project.com</channel>
+ <summary>Lightweight embedded forum plugin.</summary>
+ <description>A simple embedded forum for Symfony applications.</description>
+ <lead>
+  <name>Francois Zaninotto</name>
+  <user>fzaninotto</user>
+  <email>francois.zaninotto@symfony-project.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2007-09-25</date>
+ <version>
+   <release>0.6.2</release>
+   <api>0.6.2</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.symfony-project.com/license">MIT license</license>
+ <notes>-</notes>
+ <contents>
+   <dir name="/">
+     <file role="data" name="CHANGELOG" />
+     <file role="data" name="README" />
+     <file role="data" name="LICENSE" />
+
+     <dir name="config">
+       <file role="data" name="schema.yml" />
+     </dir>
+
+     <dir name="data">
+       <dir name="fixtures">
+         <file role="data" name="fixtures.yml" />
+       </dir>
+     </dir>
+
+     <dir name="lib">
+       <dir name="helper">
+         <file role="data" name="PaginationHelper.php" />
+         <file role="data" name="sfSimpleForumHelper.php" />
+       </dir>
+       <dir name="model">
+         <file role="data" name="sfSimpleForumCategory.php" />
+         <file role="data" name="sfSimpleForumCategoryPeer.php" />
+         <file role="data" name="sfSimpleForumForum.php" />
+         <file role="data" name="sfSimpleForumForumPeer.php" />
+         <file role="data" name="sfSimpleForumPost.php" />
+         <file role="data" name="sfSimpleForumPostPeer.php" />
+         <file role="data" name="sfSimpleForumTopic.php" />
+         <file role="data" name="sfSimpleForumTopicPeer.php" />
+         <file role="data" name="sfSimpleForumTopicView.php" />
+         <file role="data" name="sfSimpleForumTopicViewPeer.php" />
+       </dir>
+       <file role="data" name="sfSimpleForumTools.class.php" />
+     </dir>
+
+     <dir name="modules">
+       <dir name="sfSimpleForum">
+         <dir name="actions">
+           <file role="data" name="actions.class.php" />
+           <file role="data" name="components.class.php" />
+         </dir>
+         <dir name="config">
+           <file role="data" name="cache.yml" />
+           <file role="data" name="security.yml" />
+           <file role="data" name="view.yml" />
+         </dir>
+         <dir name="lib">
+           <file role="data" name="BasesfSimpleForumActions.class.php" />
+           <file role="data" name="BasesfSimpleForumComponents.class.php" />
+         </dir>
+         <dir name="templates">
+           <file role="data" name="_author.php" />
+           <file role="data" name="_forum.php" />
+           <file role="data" name="_latestPosts.php" />
+           <file role="data" name="_post.php" />
+           <file role="data" name="_topic.php" />
+           <file role="data" name="createTopicSuccess.php" />
+           <file role="data" name="forumListSuccess.php" />
+           <file role="data" name="forumSuccess.php" />
+           <file role="data" name="postListSuccess.php" />
+           <file role="data" name="topicSuccess.php" />
+         </dir>
+         <dir name="validate">
+           <file role="data" name="addPost.yml" />
+           <file role="data" name="addTopic.yml" />
+         </dir>
+       </dir>
+     </dir>
+
+     <dir name="web">
+       <dir name="css">
+         <file role="data" name="default.css" />
+       </dir>
+       <dir name="images">
+         <file role="data" name="button_bg.gif" />
+         <file role="data" name="feed-icon.png" />
+         <file role="data" name="th_bg.gif" />
+         <file role="data" name="comments.png" />
+         <file role="data" name="comment.png" />
+         <file role="data" name="lock.png" />
+         <file role="data" name="note.png" />
+       </dir>
+     </dir>
+   </dir>
+ </contents>
+
+ <dependencies>
+  <required>
+   <php>
+    <min>5.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.1</min>
+   </pearinstaller>
+   <package>
+    <name>symfony</name>
+    <channel>pear.symfony-project.com</channel>
+    <min>1.0.0</min>
+    <max>1.1.0</max>
+   </package>
+  </required>
+ </dependencies>
+
+ <phprelease>
+ </phprelease>
+
+ <changelog>
+ </changelog>
+</package>

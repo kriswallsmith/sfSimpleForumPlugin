@@ -1,0 +1,98 @@
+== Trunk ==
+
+ * francois: Improved security and credentials handling
+ * francois: [Break BC] Added a new topic table 
+ * francois: [Break BC] Refactored most of the code to be more extensible, performant and readable
+ * francois: Added "New message to read" indicator in topics (distinct from topic views, because anonymous users must still increase the topic views)
+ * francois: Better handling of post titles
+ * francois: Refactored the way a forum knows about its last post
+ * francois: Simplified the interface (removed buttons, lessened clicks)
+ * francois: Added latest posts component
+ * francois: Fixed page displayed after adding a message doesn't use pagination
+ * francois: Added a new getMessage() action
+ * francois: Switched icon set to famfamfam as I couldn't find where the sticky one came from
+ * francois: Added locked topic feature
+ * francois: Added unit tests for forum and topic calculated fields
+ * francois: Fixed forum and topic calculated fields
+ 
+== 0.6.1 Beta ==
+
+ * francois: Optimized calculated fields in model
+ * beleneglorion: Added sticky topic feature
+ * francois: Added View count on topics
+ * francois: Renamed sfBBPlugin to sfSimpleForumPlugin
+ * francois: Fixed output escaping
+ * superhaggis: Fixed typo in schema.yml
+ 
+== 0.6.0 Alpha ==
+
+ * francois: Major refactoring (breaks BC) but now the plugin is functional
+ * francois: Removed the unimplemented parts
+
+== 0.0.4 (not released)) ==
+
+* [3678] by superhaggis 
+  - Updated CHANGELOG.
+  - Added new file entries to package.xml.
+* [3958] by superhaggis
+  - Swapped more tables for divs.
+  - Added CSS class for table.
+  - Renamed extendable action class and moved logic into correct class.
+  - Modified occurances of changed class name.
+* [3959] by superhaggis
+  - Refactored CSS path computation.
+* [3983] by superhaggis
+  - Fixed autoload issue; see #1245.
+* [3984] by superhaggis
+  - Updated CHANGELOG; added TRUNK section and included dev name beside each list item.
+  - Tweaked package.xml slightly to include CHANGELOG and renamed action lib.
+* [3985] by superhaggis
+  - Added category check; error message is presented if no live categories found.
+  - Added initial docblocks.
+* [4006] by superhaggis
+  - Added initial viewThread and viewPost logic.
+* [4014] by superhaggis
+  - Added additional CSS classes for viewForum.
+* [4015] by superhaggis
+  - Added method to retrieve a thread's replies.
+  - Created initial HTML template for viewThread.
+* [4016] by superhaggis
+  - Added shortcut method to access post's creator.
+  - Refactored getReplies() to implement shortcut.
+  - Replaced method calls in viewThread template. 
+* [4020] by superhaggis
+  - Reformatted and updated CHANGELOG.
+
+== 0.0.3 ==
+
+* [3677] by superhaggis
+  - Changed sfBB_lastpost() to use format_datetime().
+  - Added additional sf_guard_user_profile fixture.
+  - Dropped divs in favour of tables for the time being.
+  - Rewrote default.css to accomodate new tabled layout.
+  - Added getter methods to sfBBPost and sfBBForum model classes.
+  - Added stripped_title column to sf_bb_post table.
+  - Added additional rule for @sf_bb_viewforum route.
+  - Created initial viewForumSuccess template.
+  - Created basic executeViewForum action. 
+
+== 0.0.2 ==
+
+* [3668] by superhaggis
+  - Added CHANGELOG.
+  - Added sfGuardPlugin dependancy to package.xml.
+* [3670] by superhaggis
+  - Removed broken PEAR dependency.
+  - Added prepended routing rules to plugin config.
+* [3671] by superhaggis
+  - Updated CHANGELOG.
+  - Updated package.xml.
+  - Edited routing section in README.
+* [3672] by superhaggis
+  - Removed TO-DO section from README.
+  - Fixed incorrect pathing in package.xml.
+
+== 0.0.1 ==
+
+* [3667] by superhaggis
+  - Initial public release/check-in.
