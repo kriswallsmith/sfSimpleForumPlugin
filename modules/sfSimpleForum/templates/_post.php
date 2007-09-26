@@ -1,7 +1,7 @@
 <?php use_helper('sfSimpleForum', 'Date') ?>
 <tr>
   <td class="post_author">
-    <?php echo link_to($post->getAuthorName(), 'sfSimpleForum/latestUserPosts?username='.$post->getAuthorName()) ?><br/>
+    <?php echo link_to($post->getAuthorName(), 'sfSimpleForum/userLatestPosts?username='.$post->getAuthorName()) ?><br/>
     <?php if (sfConfig::get('app_sfSimpleForumPlugin_show_author_details', false)): ?>
       <?php echo include_partial('sfSimpleForum/author', array('author_name' => $post->getAuthorName())) ?>
     <?php endif; ?>

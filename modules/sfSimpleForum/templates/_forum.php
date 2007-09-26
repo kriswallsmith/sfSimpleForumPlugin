@@ -11,7 +11,7 @@
     <?php echo link_to($latest_post->getTitle(), 'sfSimpleForum/post?id='.$latest_post->getId()) ?><br />
     <?php echo __('%date% ago by %author%', array(
       '%date%'   => distance_of_time_in_words($latest_post->getCreatedAt('U')),
-      '%author%' => link_to($latest_post->getAuthorName(), 'sfSimpleForum/latestUserPosts?username='.$latest_post->getAuthorName())
+      '%author%' => link_to($latest_post->getAuthorName(), 'sfSimpleForum/userLatestPosts?username='.$latest_post->getAuthorName())
       )) ?>
   </td>
 </tr>

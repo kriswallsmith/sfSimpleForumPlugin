@@ -1,5 +1,6 @@
 == Trunk ==
 
+ * francois: Refactored actions class for easier custom templating
  * francois: Fixed topic feed
  * francois: Added a topic list (for all forums, for one user) and related feeds
 

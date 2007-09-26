@@ -2,15 +2,11 @@
 
 <?php if (sfConfig::get('app_sfSimpleForum_include_breadcrumb', true)): ?>
 <?php slot('forum_navigation') ?>
-  <?php echo forum_breadcrumb($sf_data->getRaw('breadcrumb')) ?>
+  <?php echo forum_breadcrumb(array(
+    sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums')
+  )) ?>
 <?php end_slot() ?>
 <?php endif; ?> 
-
-<?php if(sfConfig::get('app_sfSimpleForumPlugin_use_feeds', true)): ?>
-<?php slot('auto_discovery_link_tag') ?>
-  <?php echo auto_discovery_link_tag('rss', 'sfSimpleForum/LatestPostsFeed', array('title' => $feed_title)) ?>
-<?php end_slot() ?>
-<?php endif; ?>
 
 <div class="sfSimpleForum">
   
@@ -22,19 +18,16 @@
   </ul>    
   <?php endif; ?>
   
-  <div class="forum_figures">
-    <?php echo link_to(
-      format_number_choice('[0]No topic yet|[1]One topic|(1,+Inf]%topics% topics', array('%topics%' => $threads), $threads),
-      'sfSimpleForum/latestTopics'
-      ) ?>, 
-    <?php echo link_to(
-      format_number_choice('[0]No message|[1]One message|(1,+Inf]%posts% messages', array('%posts%' => $posts), $posts),
-      'sfSimpleForum/latestPosts'
-      ) ?>
-    <?php if(sfConfig::get('app_sfSimpleForumPlugin_use_feeds', true)): ?>
-      <?php echo link_to(image_tag('/sfSimpleForumPlugin/images/feed-icon.png', 'align=top'), 'sfSimpleForum/latestPostsFeed', 'title='.$feed_title) ?>
-    <?php endif; ?>
-  </div>
+  <?php include_partial('sfSimpleForum/figures', array(
+    'display_topic_link'  => true,
+    'nb_topics'           => $nb_topics,
+    'topic_rule'          => 'sfSimpleForum/latestTopics',
+    'display_post_link'   => true,
+    'nb_posts'            => $nb_posts,
+    'post_rule'           => 'sfSimpleForum/latestPosts',
+    'feed_rule'           => 'sfSimpleForum/latestPostsFeed',
+    'feed_title'          => $feed_title
+  )) ?>
   
   <?php $category = '' ?>
   <table id="fora">

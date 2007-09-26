@@ -2,7 +2,11 @@
 
 <?php if (sfConfig::get('app_sfSimpleForum_include_breadcrumb', true)): ?>
 <?php slot('forum_navigation') ?>
-  <?php echo forum_breadcrumb($sf_data->getRaw('breadcrumb')) ?>
+  <?php echo forum_breadcrumb(array(
+    array(sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums'), 'sfSimpleForum/forumList'),
+    array($topic->getsfSimpleForumForum()->getName(), 'sfSimpleForum/forum?forum_name='.$topic->getsfSimpleForumForum()->getStrippedName()),
+    $topic->getTitle()
+  )) ?>
 <?php end_slot() ?>
 <?php endif; ?>
 
@@ -40,7 +44,7 @@
   </div>
   
   <table id="messages">
-    <?php foreach ($posts as $post): ?>
+    <?php foreach ($post_pager->getResults() as $post): ?>
       <?php include_partial('sfSimpleForum/post', array('post' => $post, 'include_topic' => false)) ?>
     <?php endforeach; ?>
   </table>

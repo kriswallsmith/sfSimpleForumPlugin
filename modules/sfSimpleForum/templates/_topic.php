@@ -53,7 +53,7 @@
       
     <?php echo $message_link . ' ' . __('%date% ago by %author%', array(
       '%date%'   => distance_of_time_in_words($topic->getsfSimpleForumPost()->getCreatedAt('U')),
-      '%author%' => link_to($topic->getsfSimpleForumPost()->getAuthorName(), 'sfSimpleForum/latestUserPosts?username='.$topic->getsfSimpleForumPost()->getAuthorName())
+      '%author%' => link_to($topic->getsfSimpleForumPost()->getAuthorName(), 'sfSimpleForum/userLatestPosts?username='.$topic->getsfSimpleForumPost()->getAuthorName())
       )) ?>
   </td>
 
