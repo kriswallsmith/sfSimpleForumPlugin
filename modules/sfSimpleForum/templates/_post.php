@@ -8,7 +8,7 @@
     <?php echo format_date($post->getCreatedAt('U')) ?>
   </td>
   <td class="post_message">
-    <?php if ($include_thread): ?>
+    <?php if ($include_topic): ?>
     <div class="post_details">
       <?php echo link_to($post->getsfSimpleForumForum()->getName(), 'sfSimpleForum/forum?forum_name='.$post->getsfSimpleForumForum()->getStrippedName()) ?>
      &raquo;

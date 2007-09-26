@@ -1,5 +1,8 @@
 == Trunk ==
 
+ * francois: Fixed topic feed
+ * francois: Added a topic list (for all forums, for one user) and related feeds
+
 == 2007-09-25 | 0.6.2 Beta ==
 
  * francois: Improved security and credentials handling

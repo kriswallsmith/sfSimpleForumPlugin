@@ -81,10 +81,12 @@ http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
            <file role="data" name="_latestPosts.php" />
            <file role="data" name="_post.php" />
            <file role="data" name="_topic.php" />
+           <file role="data" name="_topic_list.php" />
            <file role="data" name="createTopicSuccess.php" />
            <file role="data" name="forumListSuccess.php" />
            <file role="data" name="forumSuccess.php" />
            <file role="data" name="postListSuccess.php" />
+           <file role="data" name="topicListSuccess.php" />
            <file role="data" name="topicSuccess.php" />
          </dir>
          <dir name="validate">

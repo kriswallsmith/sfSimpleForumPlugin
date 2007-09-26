@@ -63,14 +63,13 @@ class sfSimpleForumPostPeer extends BasesfSimpleForumPostPeer
     $pager->setCriteria($c);
     $pager->setPeerMethod('doSelectJoinAllExceptsfGuardUser');
     $pager->init();
-
+    
     return $pager;
   }
   
   public static function getForTopicCriteria($topic_id)
   {
     $c = new Criteria();
-    $c->addAscendingOrderByColumn(self::ID);
     $c->add(sfSimpleForumPostPeer::TOPIC_ID, $topic_id);
     
     return $c;
@@ -79,6 +78,7 @@ class sfSimpleForumPostPeer extends BasesfSimpleForumPostPeer
   public static function getForTopic($topic_id, $max)
   {
     $c = self::getForTopicCriteria($topic_id);
+    $c->addDescendingOrderByColumn(self::ID);
     $c->setLimit($max);
     $posts = self::doSelect($c);
     
@@ -88,6 +88,7 @@ class sfSimpleForumPostPeer extends BasesfSimpleForumPostPeer
   public static function getForTopicPager($topic_id, $page = 1, $max_per_page = 10)
   {
     $c = self::getForTopicCriteria($topic_id);
+    $c->addAscendingOrderByColumn(self::ID);
     $pager = new sfPropelPager('sfSimpleForumPost', $max_per_page);
     $pager->setPage($page);
     $pager->setCriteria($c);
@@ -152,6 +153,14 @@ class sfSimpleForumPostPeer extends BasesfSimpleForumPostPeer
     $pager->init();
 
     return $pager;
+  }
+  
+  public static function countForUser($user_id)
+  {
+    $c = new Criteria();
+    $c->add(self::USER_ID, $user_id);
+    
+    return self::doCount($c);
   }
   
   /**

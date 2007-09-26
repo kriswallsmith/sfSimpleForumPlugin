@@ -122,6 +122,7 @@ all:
     pages_displayed:        5     # maximum pages displayed by the pager navigation
     feed_max:               10    # maximum messages served by feed
     show_author_details:    false # display number of messages of post authors
+    allow_new_topic_outside_forum: true
 }}}
 
 === Routing rules ===

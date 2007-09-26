@@ -41,7 +41,7 @@
   
   <table id="messages">
     <?php foreach ($posts as $post): ?>
-      <?php include_partial('sfSimpleForum/post', array('post' => $post, 'include_thread' => false)) ?>
+      <?php include_partial('sfSimpleForum/post', array('post' => $post, 'include_topic' => false)) ?>
     <?php endforeach; ?>
   </table>
   

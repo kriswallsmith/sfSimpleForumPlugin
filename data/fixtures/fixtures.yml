@@ -12,12 +12,12 @@ sfGuardUser:
   testuser:
     username:       testuser
     password:       testuser
-    
+
 sfGuardUserPermission:
   testuser_is_moderator:
     user_id:        testuser
     permission_id:  moderator
-    
+
 sfSimpleForumCategory:
   c1:
     name:        Public Boards
@@ -48,26 +48,32 @@ sfSimpleForumTopic:
   topic_1:
     title:       Installing foo
     forum_id:    f1
+    user_id:     tarzanman
   topic_2:
     title:       Bringing foo along
     forum_id:    f1
+    user_id:     tarzanman
   topic_3:
     title:       Foo forever
     forum_id:    f1
+    user_id:     johndoe
   topic_4:
     title:       Chocolate bar
     forum_id:    f2
+    user_id:     tarzanman
   topic_5:
     title:       Energy bar
     forum_id:    f2
+    user_id:     tarzanman
   topic_6:
     title:       Stick Moo
     forum_id:    f2
-    is_sticked: true
+    user_id:     testuser
+    is_sticked:  true
   topic_7:
     title:       Output Escaping
     forum_id:    f3
-
+    user_id:     tarzanman
 
 sfSimpleForumPost:
   post_1:

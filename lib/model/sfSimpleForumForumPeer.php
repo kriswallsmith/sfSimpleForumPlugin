@@ -26,4 +26,17 @@ class sfSimpleForumForumPeer extends BasesfSimpleForumForumPeer
 
     return self::doSelectJoinAll($c);
   }
+  
+  public static function getAllAsArray()
+  {
+    $forums = self::getAllOrderedByCategory();
+    $res = array();
+    
+    foreach ($forums as $forum)
+    {
+      $res[$forum->getStrippedName()] = $forum->getName();
+    }
+    
+    return $res;
+  }
 }

@@ -50,7 +50,7 @@ class BasesfSimpleForumActions extends sfActions
   public function executeLatestPosts()
   {
     $this->setForumListVars();
-
+    
     $this->post_pager = sfSimpleForumPostPeer::getLatestPager(
       $this->getRequestParameter('page', 1),
       sfConfig::get('app_sfSimpleForumPlugin_max_per_page', 10)
@@ -64,10 +64,13 @@ class BasesfSimpleForumActions extends sfActions
     );
     $this->rule = 'sfSimpleForum/latestPosts';
     $this->feed_rule = 'sfSimpleForum/latestPostsFeed';
-
+    
+    $this->nb_topics = sfSimpleForumTopicPeer::doCount(new Criteria());
+    $this->topic_rule = 'sfSimpleForum/latestTopics';
+    
     $this->setTemplate('postList');
   }
-
+  
   public function executeLatestPostsFeed()
   {
     $this->setForumListVars();
@@ -80,8 +83,8 @@ class BasesfSimpleForumActions extends sfActions
     
     $this->setForumListVars();
     $this->rule = 'sfSimpleForum/latestPosts';
-
-    return $this->renderText($this->postFeed());
+    
+    return $this->renderText($this->getFeedFromObjects($this->posts));
   }
   
   protected function setForumListVars()
@@ -91,7 +94,53 @@ class BasesfSimpleForumActions extends sfActions
       '%forums%'  => sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums'),
     ));
   }
-
+  
+  public function executeLatestTopics()
+  {
+    $this->setTopicListVars();
+    
+    $this->topics_pager = sfSimpleForumTopicPeer::getLatestPager(
+      $this->getRequestParameter('page', 1),
+      sfConfig::get('app_sfSimpleForumPlugin_max_per_page', 10)
+    );
+    
+    $this->title = __('Latest topics');
+    $this->breadcrumb = array(
+      array(sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums'), 'sfSimpleForum/forumList'),
+      $this->title
+    );
+    $this->rule = 'sfSimpleForum/latestTopics';
+    $this->feed_rule = 'sfSimpleForum/latestTopicsFeed';
+    
+    $this->nb_posts = sfSimpleForumPostPeer::doCount(new Criteria());
+    $this->post_rule = 'sfSimpleForum/latestPosts';
+    
+    $this->setTemplate('topicList');
+  }
+  
+  public function executeLatestTopicsFeed()
+  {
+    $this->setTopicListVars();
+        
+    $this->checkFeedPlugin();
+    
+    $this->topics = sfSimpleForumTopicPeer::getLatest(
+      sfConfig::get('app_sfSimpleForumPlugin_feed_max', 10)
+    );
+    
+    $this->rule = 'sfSimpleForum/latestTopics';
+    
+    return $this->renderText($this->getFeedFromObjects($this->topics));
+  }
+  
+  protected function setTopicListVars()
+  {
+    sfLoader::loadHelpers('I18N');
+    $this->feed_title =  __('Latest topics from %forums%', array(
+      '%forums%'  => sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums'),
+    ));
+  }
+  
   // One forum
   
   public function executeForum()
@@ -129,6 +178,10 @@ class BasesfSimpleForumActions extends sfActions
     $this->title = __('Latest messages');
     $this->rule = 'sfSimpleForum/latestForumPosts?forum_name='.$this->name;
     $this->feed_rule = 'sfSimpleForum/latestForumPostsFeed?forum_name='.$this->name;
+
+    $this->nb_topics = $this->forum->countsfSimpleForumTopics();
+    $this->topic_rule = 'sfSimpleForum/forum?forum_name='.$this->name;
+
     $this->breadcrumb = array(
       array(sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums'), 'sfSimpleForum/forumList'),
       array($this->forum->getName(), 'sfSimpleForum/forum?forum_name='.$this->name),
@@ -150,7 +203,7 @@ class BasesfSimpleForumActions extends sfActions
     
     $this->rule = 'sfSimpleForum/latestForumPosts?forum_name='.$this->name;
     
-    return $this->renderText($this->postFeed());
+    return $this->renderText($this->getFeedFromObjects($this->posts));
   }
     
   protected function setForumVars()
@@ -172,15 +225,15 @@ class BasesfSimpleForumActions extends sfActions
 
   public function executeTopic()
   {
-    $this->post_pager = sfSimpleForumPostPeer::getForTopicPager(
-      $this->getRequestParameter('id'), 
+    $this->topic = sfSimpleForumTopicPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->topic);
+    $this->post_pager = $this->topic->getPostsPager(
       $this->getRequestParameter('page', 1),
       sfConfig::get('app_sfSimpleForumPlugin_max_per_page', 10)
     );
     $this->forward404Unless($this->post_pager);
 
     $this->posts = $this->post_pager->getResults();
-    $this->topic = $this->posts[0]->getTopic();
     
     if (sfConfig::get('app_sfSimpleForumPlugin_count_views', true))
     {
@@ -203,18 +256,18 @@ class BasesfSimpleForumActions extends sfActions
   {
     $this->checkFeedPlugin();
     
-    $this->rule = 'sfSimpleForum/topic?id='.$this->getRequestParameter('id').'&stripped_title='.$this->getRequestParameter('forum_name');
-    
-    $this->posts = sfSimpleForumPostPeer::getReplies(
-      $this->getRequestParameter('id'), 
+    $this->topic = sfSimpleForumTopicPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->topic);
+    $this->posts = $this->topic->getPosts(
       sfConfig::get('app_sfSimpleForumPlugin_feed_max', 10)
     );
     $this->forward404Unless($this->posts);
-
-    $this->topic = $this->posts[0]->getParent();
+    
     $this->setTopicVars();
     
-    return $this->renderText($this->postFeed());
+    $this->rule = 'sfSimpleForum/topic?id='.$this->getRequestParameter('id').'&stripped_title='.$this->getRequestParameter('forum_name');
+    
+    return $this->renderText($this->getFeedFromObjects($this->posts));
   }
   
   protected function setTopicVars()
@@ -245,6 +298,7 @@ class BasesfSimpleForumActions extends sfActions
     $page = ceil(($position + 1) / sfConfig::get('app_sfSimpleForumPlugin_max_per_page', 10));
       $this->redirect('sfSimpleForum/topic?id='.$topic->getId().'&stripped_title='.$topic->getStrippedTitle().'&page='.$page.'#post'.$post->getId());
   }
+  
   // One user
 
   public function executeLatestUserPosts()
@@ -263,12 +317,20 @@ class BasesfSimpleForumActions extends sfActions
       array(sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums'), 'sfSimpleForum/forumList'),
       $this->title
     );
+    
     $this->rule = 'sfSimpleForum/latestUserPosts?username='.$this->username;
     $this->feed_rule = 'sfSimpleForum/latestUserPostsFeed?username='.$this->username;
-
+    $this->feed_title = __('Latest messages from %forums% by %username%', array(
+      '%forums%'   => sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums'),
+      '%username%' => $this->user->getUsername(),
+    ));
+    
+    $this->nb_topics = sfSimpleForumTopicPeer::countForUser($this->user->getId());
+    $this->topic_rule = 'sfSimpleForum/latestUserTopics?username='.$this->username;
+    
     $this->setTemplate('postList');
   }
-
+  
   public function executeLatestUserPostsFeed()
   {
     $this->setUserVars();
@@ -279,10 +341,61 @@ class BasesfSimpleForumActions extends sfActions
     );
     
     $this->rule = 'sfSimpleForum/latestUserPosts?username='.$this->username;
-
-    return $this->renderText($this->postFeed());
+    $this->feed_title = __('Latest messages from %forums% by %username%', array(
+      '%forums%'   => sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums'),
+      '%username%' => $this->user->getUsername(),
+    ));
+    
+    return $this->renderText($this->getFeedFromObjects($this->posts));
   }
   
+  public function executeLatestUserTopics()
+  {
+    $this->setUserVars();
+        
+    $this->topics_pager = sfSimpleForumTopicPeer::getForUserPager(
+      $this->user->getId(),
+      $this->getRequestParameter('page', 1),
+      sfConfig::get('app_sfSimpleForumPlugin_max_per_page', 10)
+    );
+    $this->nb_topics = $this->topics_pager->getNbResults();
+    
+    sfLoader::loadHelpers('I18N');
+    $this->title = __('Topics by %user%', array('%user%' => $this->username));
+    $this->breadcrumb = array(
+      array(sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums'), 'sfSimpleForum/forumList'),
+      $this->title
+    );
+    $this->rule = 'sfSimpleForum/latestUserTopics?username='.$this->username;
+    $this->feed_rule = 'sfSimpleForum/latestUserTopicsFeed?username='.$this->username;
+    $this->feed_title = __('Latest topics from %forums% by %username%', array(
+      '%forums%'   => sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums'),
+      '%username%' => $this->user->getUsername(),
+    ));
+    
+    $this->nb_posts = sfSimpleForumPostPeer::countForUser($this->user->getId());
+    $this->post_rule = 'sfSimpleForum/latestUserPosts?username='.$this->username;
+    
+    $this->setTemplate('topicList');
+  }
+  
+  public function executeLatestUserTopicsFeed()
+  {
+    $this->setUserVars();
+    
+    $this->topics = sfSimpleForumTopicPeer::getForUser(
+      $this->user->getId(),
+      sfConfig::get('app_sfSimpleForumPlugin_feed_max', 10)
+    );
+    
+    $this->rule = 'sfSimpleForum/latestUserTopics?username='.$this->username;
+    $this->feed_title = __('Latest topics from %forums% by %username%', array(
+      '%forums%'   => sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums'),
+      '%username%' => $this->user->getUsername(),
+    ));
+    
+    return $this->renderText($this->getFeedFromObjects($this->topics));
+  }
   protected function setUserVars()
   {
     $this->username = $this->getRequestParameter('username');
@@ -291,12 +404,8 @@ class BasesfSimpleForumActions extends sfActions
     $this->forward404Unless($this->user);
     
     sfLoader::loadHelpers('I18N');
-    $this->feed_title = __('Latest messages from %forums% by %username%', array(
-      '%forums%'   => sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums'),
-      '%username%' => $this->user->getUsername(),
-    ));
   }
-    
+  
   // Feed related private methods
   
   protected function checkFeedPlugin()
@@ -306,11 +415,11 @@ class BasesfSimpleForumActions extends sfActions
       throw new sfException('You must install sfFeed2Plugin to use the feed actions');
     }
   }
-
-  protected function postFeed()
+  
+  protected function getFeedFromObjects($objects)
   {
     $feed = sfFeedPeer::createFromObjects(
-      $this->posts,
+      $objects,
       array(
         'format'      => 'atom1',
         'title'       => $this->feed_title,
@@ -318,7 +427,6 @@ class BasesfSimpleForumActions extends sfActions
         'methods'     => array('authorEmail' => '')
       )
     );
-    $this->setTemplate('postFeed');
     $this->setLayout(false);
     return $feed->asXml();
   }
@@ -328,7 +436,10 @@ class BasesfSimpleForumActions extends sfActions
   public function executeCreateTopic()
   {
     $this->forum = sfSimpleForumForumPeer::retrieveByStrippedName($this->getRequestParameter('forum_name'));
-    $this->forward404Unless($this->forum);
+    if(!sfConfig::get('app_sfSimpleForumPlugin_allow_new_topic_outside_forum', true))
+    {
+      $this->forward404Unless($this->forum);
+    }
     
     $this->topic_name = '';
     $this->topic_id = null;
@@ -350,6 +461,7 @@ class BasesfSimpleForumActions extends sfActions
     $topic = new sfSimpleForumTopic();
     $topic->setsfSimpleForumForum($forum);
     $topic->setTitle($this->getRequestParameter('title'));
+    $topic->setUserId($this->getUser()->getGuardUser()->getId());
     if ($this->getUser()->hasCredential('moderator'))
     {
       $topic->setIsSticked($this->getRequestParameter('is_sticked', 0));

@@ -22,6 +22,11 @@ class sfSimpleForumTopic extends BasesfSimpleForumTopic
     $this->is_new = $value;
   }
   
+  public function getUser()
+  {
+    return $this->getsfGuardUser();
+  }
+  
   public function setTitle($title)
   {
     parent::setTitle($title);
