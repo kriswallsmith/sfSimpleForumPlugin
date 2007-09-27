@@ -28,6 +28,14 @@
       'sfSimpleForum/topic?id='.$topic->getId().'&stripped_title='.$topic->getStrippedTitle(),
       array('class' => $topic->getIsNew() ? 'new' : '')) ?>
       
+    <?php $pages = ceil(($topic->getNbPosts()) / sfConfig::get('app_sfSimpleForumPlugin_max_per_page', 10)) ?>
+    <?php if ($pages > 1): ?>
+      <?php echo link_to(
+        '(last page)',
+        'sfSimpleForum/topic?id='.$topic->getId().'&stripped_title='.$topic->getStrippedTitle().'&page='.$pages
+      ) ?>
+    <?php endif; ?>
+    
     <?php if ($include_forum): ?>
       in <?php echo link_to(
         $topic->getsfSimpleForumForum()->getName(),
