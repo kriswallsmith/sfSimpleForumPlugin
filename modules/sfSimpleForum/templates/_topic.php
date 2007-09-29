@@ -42,11 +42,9 @@
         'sfSimpleForum/forum?stripped_name='.$topic->getsfSimpleForumForum()->getStrippedName()
       ) ?>
     <?php endif; ?>
-      
+    
     <?php if ($sf_user->hasCredential('moderator')): ?>
-    <ul class="post_actions">
-      <li><?php echo link_to(__('Delete'), 'sfSimpleForum/deleteTopic?id='.$topic->getId()) ?></li>
-    </ul>
+      <?php include_partial('sfSimpleForum/topic_moderator_actions', array('topic' => $topic)) ?>
     <?php endif; ?>
     
   </td>

@@ -51,25 +51,27 @@
   
   <?php echo pager_navigation($post_pager, 'sfSimpleForum/topic?id='.$topic->getId().'&stripped_title='.$topic->getStrippedTitle()) ?>
   <?php if (!$topic->getIsLocked() && $sf_user->isAuthenticated()): ?>
-  <h2>
-    <?php echo __('Post a reply') ?>
-  </h2>
+    <h2>
+      <?php echo __('Post a reply') ?>
+    </h2>
 
-  <?php echo form_tag('sfSimpleForum/addPost', 'id=add_topic name=add_topic') ?>
-    <?php echo input_hidden_tag('topic_id', $topic->getId()) ?>
+    <?php echo form_tag('sfSimpleForum/addPost', 'id=add_topic name=add_topic') ?>
+      <?php echo input_hidden_tag('topic_id', $topic->getId()) ?>
   
-    <?php echo form_error('body') ?>
-    <?php echo label_for('body', __('Body')) ?>
-    <?php echo textarea_tag('body', '', 'id=topic_body') ?>
+      <?php echo form_error('body') ?>
+      <?php echo label_for('body', __('Body')) ?>
+      <?php echo textarea_tag('body', '', 'id=topic_body') ?>
 
-    <?php echo submit_tag(__('Post'), 'id=topic_submit') ?>
-  </form>
-  <?php elseif (!$topic->getIsLocked() && !$sf_user->isAuthenticated()): ?>
-    <ul class="forum_actions">
-        <li><?php echo link_to(
-          __('Post a reply'), 
-          sfConfig::get('sf_login_module').'/'.sfConfig::get('sf_login_action')
-        ) ?></li>
-    </ul>
+      <?php echo submit_tag(__('Post'), 'id=topic_submit') ?>
+    </form>
+    <?php elseif (!$topic->getIsLocked() && !$sf_user->isAuthenticated()): ?>
+      <ul class="forum_actions">
+          <li><?php echo link_to(
+            __('Post a reply'), 
+            sfConfig::get('sf_login_module').'/'.sfConfig::get('sf_login_action')
+          ) ?></li>
+      </ul>
+  <?php elseif ($topic->getIsLocked() && $sf_user->isAuthenticated()): ?>
+    <?php echo __('This topic was locked by a forum moderator. No reply can be added.') ?>
   <?php endif; ?>
 </div>

@@ -18,11 +18,10 @@
     <div class="post_content"><a name="post<?php echo $post->getId() ?>"></a>
       <?php echo $post->getContent() ?> 
     </div>
-    <ul class="post_actions">
-      <?php if ($sf_user->hasCredential('moderator')): ?>
-        <li><?php echo link_to(__('Delete'), 'sfSimpleForum/deletePost?id='.$post->getId()) ?></li>
-      <?php endif; ?>
-    </ul>   
+
+    <?php if ($sf_user->hasCredential('moderator')): ?>
+      <?php include_partial('sfSimpleForum/post_moderator_actions', array('post' => $post)) ?>
+    <?php endif; ?>
   </td>
 </tr>
 <tr class="spacer"><td colspan="2"></td></tr>

@@ -139,22 +139,13 @@ ul#forum_navigation li
   display: inline;
 }
 
-ul.post_actions
-{
-  list-style: none;
-  text-align: right;
-  font-size: 13px;
-}
-
-ul.forum_actions li, ul.post_actions li
+ul.forum_actions li
 {
   display: inline;
   width: 100px;
   height: 25px;
 }
 
-ul.post_actions li a:link, 
-ul.post_actions li a:visited, 
 ul.forum_actions li a:link, 
 ul.forum_actions li a:visited
 {
@@ -164,6 +155,41 @@ ul.forum_actions li a:visited
   text-decoration: none!important;
   border-bottom: solid 1px #B08854;
   border-right: solid 1px #B08854;
+}
+
+ul.post_actions
+{
+  list-style: none;
+  text-align: right;
+}
+
+ul.post_actions li
+{
+  display: inline;
+  font-size: 0.9em;
+}
+
+ul.post_actions li::before
+{
+  color: lightgrey;
+  content: ' - ';
+}
+
+ul.post_actions li:first-child::before
+{
+  content: '';
+}
+
+ul.post_actions li a:link, 
+ul.post_actions li a:visited
+{
+  color: lightgrey;
+  text-decoration: none!important;
+}
+
+ul.post_actions li a:hover
+{
+  text-decoration: underline!important;
 }
 
 /*PAGINATION class selector*/
