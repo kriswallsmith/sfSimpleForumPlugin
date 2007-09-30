@@ -1,5 +1,6 @@
 == Trunk ==
 
+ * francois: Made the schema customizable
  * francois: Partialized and restyled moderator actions for easier customization
  * francois: Added link to last page for multi-pages topics
  * francois: Refactored actions class for easier custom templating

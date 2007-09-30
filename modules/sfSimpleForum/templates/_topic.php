@@ -55,12 +55,16 @@
   <?php endif; ?>
 
   <td class="thread_recent">
-    <?php $message_link = $topic->getNbPosts() ? __('Last reply') : __('Posted') ?>
+    <?php $message_link = $topic->getNbReplies() ? __('Last reply') : __('Posted') ?>
       
     <?php echo $message_link . ' ' . __('%date% ago by %author%', array(
       '%date%'   => distance_of_time_in_words($topic->getsfSimpleForumPost()->getCreatedAt('U')),
       '%author%' => link_to($topic->getsfSimpleForumPost()->getAuthorName(), 'sfSimpleForum/userLatestPosts?username='.$topic->getsfSimpleForumPost()->getAuthorName())
       )) ?>
+      
+    <?php if ($topic->getNbReplies()): ?>
+      (<?php echo link_to(__('view'), 'sfSimpleForum/post?id='.$topic->getLatestPostId()) ?>)
+    <?php endif ?>
   </td>
 
 </tr>
