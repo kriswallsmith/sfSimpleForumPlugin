@@ -172,7 +172,11 @@ class sfSimpleForumPostPeer extends BasesfSimpleForumPostPeer
    */
   public static function doSelectJoinTopicAndForum(Criteria $c, $con = null)
   {
-    sfLogger::getInstance()->info('Getting Posts with topic and forum');
+    foreach (sfMixer::getCallables('BasesfSimpleForumPostPeer:doSelectJoinAllExcept:doSelectJoinAllExcept') as $callable)
+    {
+      call_user_func($callable, 'BasesfSimpleForumPostPeer', $c, $con);
+    }
+    
     $c = clone $c;
     
     if ($c->getDbName() == Propel::getDefaultDB())
