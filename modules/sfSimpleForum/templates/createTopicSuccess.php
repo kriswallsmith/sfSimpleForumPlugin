@@ -20,36 +20,7 @@
 <div class="sfSimpleForum">
 
   <h1><?php echo __('Create a new topic') ?></h1>
-
-  <?php echo form_tag('sfSimpleForum/addTopic', 'id=add_topic name=add_topic') ?>
-    <?php if ($forum): ?>
-      <?php echo input_hidden_tag('forum_name', $forum->getStrippedName()) ?>
-    <?php endif; ?>
-    <?php echo input_hidden_tag('topic_id', $topic_id) ?>
-    
-    <?php echo form_error('title') ?>
-    <?php echo label_for('title', __('Title')) ?>
-    <?php echo input_tag('title', $topic_id ? __('Re: ') . $topic_name : '', 'id=topic_title') ?>
-    
-    <?php if (!$forum): ?>
-      <?php echo label_for('forum', __('Forum')) ?>
-      <?php echo select_tag('forum_name', options_for_select(sfSimpleForumForumPeer::getAllAsArray())) ?>
-    <?php endif; ?>
-    
-    <?php echo form_error('body') ?>
-    <?php echo label_for('body', __('Body')) ?>
-    <?php echo textarea_tag('body', '', 'id=topic_body') ?>
-    <?php if ($sf_user->hasCredential('moderator')): ?>
-    <div class="option">
-      <?php echo checkbox_tag('is_sticked', '1')?>
-      <?php echo label_for('is_sticked', __('Sticked topic')) ?>
-    </div>
-    <div class="option">
-      <?php echo checkbox_tag('is_locked', '1')?>
-      <?php echo label_for('is_locked', __('Locked topic')) ?>
-    </div>
-    <?php endif; ?>
-    <?php echo submit_tag(__('Post'), 'id=topic_submit') ?>
-  </form>
+  
+  <?php include_partial('sfSimpleForum/add_post_form', array('forum' => $forum)) ?>
 
 </div>

@@ -69,11 +69,21 @@ class sfSimpleForumForum extends BasesfSimpleForumForum
     return sfSimpleForumPostPeer::getForForumPager($this->getStrippedName(), $page, $max_per_page);
   }
   
-  public function updateCounts($latestReply, $con = null)
+  public function updateCounts($latestReply = null, $con = null)
   {
-    $this->setNbPosts($this->countsfSimpleForumPosts());
-    $this->setNbTopics($this->countsfSimpleForumTopics());
-    $this->setLatestPostId($latestReply->getId());
+    if($latestReply)
+    {
+      $this->setNbPosts($this->countsfSimpleForumPosts());
+      $this->setNbTopics($this->countsfSimpleForumTopics());
+      $this->setLatestPostId($latestReply->getId());
+      $this->setUpdatedAt($latestReply->getCreatedAt());
+    }
+    else
+    {
+      $this->setNbPosts(0);
+      $this->setNbTopics(0);
+      $this->setLatestPostId(null);
+    }
     $this->save($con);
   }
   

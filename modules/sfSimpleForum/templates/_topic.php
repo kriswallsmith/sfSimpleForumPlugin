@@ -43,9 +43,7 @@
       ) ?>
     <?php endif; ?>
     
-    <?php if ($sf_user->hasCredential('moderator')): ?>
-      <?php include_partial('sfSimpleForum/topic_moderator_actions', array('topic' => $topic)) ?>
-    <?php endif; ?>
+    <?php include_partial('sfSimpleForum/topic_moderator_actions', array('topic' => $topic, 'user_is_moderator' => $user_is_moderator)) ?>
     
   </td>
   <td class="thread_replies"><?php echo $topic->getNbReplies() ?></td>

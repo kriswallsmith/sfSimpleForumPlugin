@@ -1,3 +1,9 @@
+_topic:
+  enabled: on
+
+_post:
+  enabled: on
+  
 _author:
   enabled: on
   

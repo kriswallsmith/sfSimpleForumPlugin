@@ -53,7 +53,7 @@ class sfSimpleForumPost extends BasesfSimpleForumPost
     return array_search($this->getId(), $messages);
   }
   
-  public function save($con = null)
+  public function save($con = null, $preserveTopic = false)
   {
     if(!$con)
     {
@@ -73,8 +73,11 @@ class sfSimpleForumPost extends BasesfSimpleForumPost
       parent::save($con);
       
       $latestPost = $topic->getLatestPostByQuery();
+      if($preserveTopic)
+      {
+        $topic->leaveUpdatedAtUnchanged();
+      }
       $topic->updateReplies($latestPost, $con);
-      $this->getsfSimpleForumForum()->updateCounts($latestPost, $con);
       
       $con->commit();
     }
@@ -85,7 +88,7 @@ class sfSimpleForumPost extends BasesfSimpleForumPost
     }
   }
 
-  public function delete($con = null)
+  public function delete($con = null, $preserveTopic = true)
   {
     if(!$con)
     {
@@ -99,14 +102,12 @@ class sfSimpleForumPost extends BasesfSimpleForumPost
       parent::delete($con);
       
       $topic = $this->getsfSimpleForumTopic();
+      if($preserveTopic)
+      {
+        $topic->leaveUpdatedAtUnchanged();
+      }
       $latestPost = $topic->getLatestPostByQuery();
-      $topic->setUpdatedAt($latestPost->getCreatedAt());
       $topic->updateReplies($latestPost, $con);
-      
-      $forum = $this->getsfSimpleForumForum();
-      $latestPost = $forum->getLatestPostByQuery();
-      $forum->setUpdatedAt($latestPost->getCreatedAt());
-      $forum->updateCounts($latestPost, $con);
      
       $con->commit();
     }

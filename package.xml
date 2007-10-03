@@ -77,12 +77,16 @@ http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
          </dir>
          <dir name="templates">
            <file role="data" name="_author.php" />
+           <file role="data" name="_add_post_form.php" />
            <file role="data" name="_figures.php" />
            <file role="data" name="_forum.php" />
            <file role="data" name="_latestPosts.php" />
            <file role="data" name="_post.php" />
+           <file role="data" name="_post_list.php" />
+           <file role="data" name="_post_moderator_actions.php" />
            <file role="data" name="_topic.php" />
            <file role="data" name="_topic_list.php" />
+           <file role="data" name="_topic_moderator_actions.php" />
            <file role="data" name="createTopicSuccess.php" />
            <file role="data" name="forumLatestPostsSuccess.php" />
            <file role="data" name="forumListSuccess.php" />

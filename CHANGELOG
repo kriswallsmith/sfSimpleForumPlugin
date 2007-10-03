@@ -1,7 +1,9 @@
 == Trunk ==
 
+ * francois: Extended the cache coverage
+ * francois: Partialized templates for easier customization
+ * francois: Refactored Forum and Topic counts (now working with save and delete)
  * francois: Made the schema customizable
- * francois: Partialized and restyled moderator actions for easier customization
  * francois: Added link to last page for multi-pages topics
  * francois: Refactored actions class for easier custom templating
  * francois: Fixed topic feed

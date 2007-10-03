@@ -195,7 +195,8 @@ all:
 
 == TODO ==
 
- * Report message to moderator, list of reported messages
+ * Authors can edit a message during its first minutes
+ * Moderators can edit a message
  * Moderators can move a topic to another forum and a message to another topic
  * Add images to make the default style less ugly
  * Search engine

@@ -47,10 +47,13 @@ class sfSimpleForumPostPeer extends BasesfSimpleForumPostPeer
     return $c;
   }  
   
-  public static function getLatest($max = 10)
+  public static function getLatest($max = null)
   {
     $c = self::getLatestCriteria();
-    $c->setLimit($max);
+    if($max)
+    {
+      $c->setLimit($max);
+    }
     
     return self::doSelect($c);
   }
@@ -75,11 +78,14 @@ class sfSimpleForumPostPeer extends BasesfSimpleForumPostPeer
     return $c;
   }
   
-  public static function getForTopic($topic_id, $max)
+  public static function getForTopic($topic_id, $max = null)
   {
     $c = self::getForTopicCriteria($topic_id);
     $c->addDescendingOrderByColumn(self::ID);
-    $c->setLimit($max);
+    if($max)
+    {
+      $c->setLimit($max);
+    }
     $posts = self::doSelect($c);
     
     return $posts;
@@ -106,10 +112,13 @@ class sfSimpleForumPostPeer extends BasesfSimpleForumPostPeer
     return $c;
   }  
   
-  public static function getForForum($forum_name, $max = 10)
+  public static function getForForum($forum_name, $max = null)
   {
     $c = self::getForForumCriteria($forum_name);
-    $c->setLimit($max);
+    if($max)
+    {
+      $c->setLimit($max);
+    }
     
     return self::doSelect($c);
   }
@@ -135,10 +144,13 @@ class sfSimpleForumPostPeer extends BasesfSimpleForumPostPeer
     return $c;
   }  
 
-  public static function getForUser($user_id, $max = 10)
+  public static function getForUser($user_id, $max = null)
   {
     $c = self::getForUserCriteria($user_id);
-    $c->setLimit($max);
+    if($max)
+    {
+      $c->setLimit($max);
+    }
     
     return self::doSelect($c);
   }

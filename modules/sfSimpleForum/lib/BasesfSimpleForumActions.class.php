@@ -339,9 +339,6 @@ class BasesfSimpleForumActions extends sfActions
     {
       $this->forward404Unless($this->forum);
     }
-    
-    $this->topic_name = '';
-    $this->topic_id = null;
   }
   
   // Handle the topic creation

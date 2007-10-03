@@ -90,7 +90,7 @@ class sfSimpleForumTopic extends BasesfSimpleForumTopic
     return $this->getsfSimpleForumPost();
   }
   
-  public function getPosts($max)
+  public function getPosts($max = null)
   {
     return sfSimpleForumPostPeer::getForTopic($this->getId(), $max);
   }
@@ -100,17 +100,56 @@ class sfSimpleForumTopic extends BasesfSimpleForumTopic
     return sfSimpleForumPostPeer::getForTopicPager($this->getId(), $page, $max_per_page);
   }
   
-  public function updateReplies($latestReply, $con = null)
+  public function updateReplies($latestReply = null, $con = null)
   {
     if(!$this->isDeleted())
     {
-      $this->setNbPosts($this->countsfSimpleForumPosts());
-      $this->setLatestPostId($latestReply->getId());
-      $this->save($con);
+      if($latestReply)
+      {
+        $this->setNbPosts($this->countsfSimpleForumPosts());
+        $this->setLatestPostId($latestReply->getId());
+        $this->setUpdatedAt($latestReply->getCreatedAt());
+      }
+      else
+      {
+        $this->setNbPosts(0);
+        $this->setLatestPostId(null);
+      }
+      $this->save($con, $latestReply);
     }
   }
-  
-  public function delete($con = null)
+
+  public function save($con = null, $latestPost = null)
+  {
+    if(!$con)
+    {
+      $con = Propel::getConnection();
+    }
+
+    try
+    {
+      $con->begin();
+      
+      parent::save($con);
+      
+      // Update the topic's forum counts
+      $forum = $this->getsfSimpleForumForum();
+      if(!$latestPost)
+      {
+        $latestPost = $forum->getLatestPostByQuery();
+      }
+      $forum->updateCounts($latestPost, $con);
+     
+      $con->commit();
+    }
+    catch (Exception $e)
+    {
+      $con->rollback();
+      throw $e;
+    }
+  }
+    
+  public function delete($con = null, $latestPost = null)
   {
     if(!$con)
     {
@@ -125,12 +164,12 @@ class sfSimpleForumTopic extends BasesfSimpleForumTopic
       
       // Update the topic's forum counts
       $forum = $this->getsfSimpleForumForum();
-      if($latestPost = $forum->getLatestPostByQuery())
+      if(!$latestPost)
       {
-        $forum->setUpdatedAt($latestPost->getCreatedAt());
-        $forum->updateCounts($latestPost, $con);
+        $latestPost = $forum->getLatestPostByQuery();
       }
-     
+      $forum->updateCounts($latestPost, $con);
+      
       $con->commit();
     }
     catch (Exception $e)

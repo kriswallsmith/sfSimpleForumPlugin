@@ -25,11 +25,7 @@
     'feed_title'          => $feed_title
   )) ?>
   
-  <table id="messages">
-    <?php foreach ($post_pager->getResults() as $post): ?>
-      <?php include_partial('sfSimpleForum/post', array('post' => $post, 'include_topic' => true)) ?>
-    <?php endforeach; ?>
-  </table>
+  <?php include_partial('sfSimpleForum/post_list', array('posts' => $post_pager->getResults(), 'include_topic' => true)) ?>
   
   <?php echo pager_navigation($post_pager, 'sfSimpleForum/userLatestPosts?username='.$username) ?>
 

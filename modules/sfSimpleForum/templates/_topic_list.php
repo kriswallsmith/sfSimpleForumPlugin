@@ -8,6 +8,11 @@
     <th class="thread_recent"><?php echo __('Last Message') ?></th>
   </tr>
   <?php foreach ($topics as $topic): ?>
-    <?php include_partial('sfSimpleForum/topic', array('topic' => $topic, 'include_forum' => $include_forum)) ?>
+    <?php include_partial('sfSimpleForum/topic', array(
+      'topic'             => $topic, 
+      'include_forum'     => $include_forum, 
+      'user_is_moderator' => $sf_user->hasCredential('moderator'),
+      'sf_cache_key'      => $topic->getId().'_'.$sf_user->hasCredential('moderator')
+      )) ?>
   <?php endforeach; ?>
 </table>
