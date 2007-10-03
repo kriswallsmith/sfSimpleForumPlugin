@@ -1,5 +1,7 @@
 == Trunk ==
 
+== 2007-10-03 | 0.6.3 Beta ==
+
  * francois: Extended the cache coverage
  * francois: Partialized templates for easier customization
  * francois: Refactored Forum and Topic counts (now working with save and delete)
