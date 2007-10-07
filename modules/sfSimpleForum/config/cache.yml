@@ -6,6 +6,9 @@ _post:
   
 _author:
   enabled: on
+
+_author_name:
+  enabled: on
   
 all:
   enabled: off

@@ -39,7 +39,7 @@
     <?php if ($include_forum): ?>
       in <?php echo link_to(
         $topic->getsfSimpleForumForum()->getName(),
-        'sfSimpleForum/forum?stripped_name='.$topic->getsfSimpleForumForum()->getStrippedName()
+        'sfSimpleForum/forum?forum_name='.$topic->getsfSimpleForumForum()->getStrippedName()
       ) ?>
     <?php endif; ?>
     
@@ -54,15 +54,16 @@
 
   <td class="thread_recent">
     <?php $message_link = $topic->getNbReplies() ? __('Last reply') : __('Posted') ?>
-      
+    <?php $latest_post = $topic->getsfSimpleForumPost() ?>
     <?php echo $message_link . ' ' . __('%date% ago by %author%', array(
-      '%date%'   => distance_of_time_in_words($topic->getsfSimpleForumPost()->getCreatedAt('U')),
-      '%author%' => link_to($topic->getsfSimpleForumPost()->getAuthorName(), 'sfSimpleForum/userLatestPosts?username='.$topic->getsfSimpleForumPost()->getAuthorName())
+      '%date%'   => distance_of_time_in_words($latest_post->getCreatedAt('U')),
+      '%author%' => link_to(get_partial('sfSimpleForum/author_name', array('author' => $latest_post->getAuthorName(), 'sf_cache_key' => $latest_post->getAuthorName())), 'sfSimpleForum/userLatestPosts?username='.$latest_post->getAuthorName())
       )) ?>
-      
+
     <?php if ($topic->getNbReplies()): ?>
       (<?php echo link_to(__('view'), 'sfSimpleForum/post?id='.$topic->getLatestPostId()) ?>)
-    <?php endif ?>
+    <?php endif; ?>
+
   </td>
 
 </tr>

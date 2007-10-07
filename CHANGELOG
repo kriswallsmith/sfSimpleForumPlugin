@@ -1,5 +1,6 @@
 == Trunk ==
 
+ * francois: Added a new partial to allow third-party profile enhancements
  * francois: Further optimized queries
  
 == 2007-10-03 | 0.6.3 Beta ==
