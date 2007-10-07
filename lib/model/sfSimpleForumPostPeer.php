@@ -10,35 +10,20 @@
 class sfSimpleForumPostPeer extends BasesfSimpleForumPostPeer
 {
   
-  public static function setIsNewForUser($topics, $user_id)
+  public static function getOneJoinForum($id)
   {
-    $topic_ids  = array();
-    $topic_hash = array();
-    foreach ($topics as $topic)
-    {
-      // A topic is new unless we can find a view from the user for it
-      $topic->setIsNew(true);
-      $id = $topic->getId();
-      $topic_ids[] = $id;
-      $topic_hash[$id] = $topic;
-    }
-    
     $c = new Criteria();
-    $c->clearSelectColumns();
-    $c->addSelectColumn(sfSimpleForumTopicViewPeer::TOPIC_ID);
-    $c->add(sfSimpleForumTopicViewPeer::USER_ID, $user_id);
-    $c->add(sfSimpleForumTopicViewPeer::TOPIC_ID, $topic_ids, Criteria::IN);
-    $rs = sfSimpleForumTopicViewPeer::doSelectRS($c);
+    $c->add(self::ID, $id);
+    $c->setLimit(1);
     
-    while($rs->next())
+    $objects = self::doSelectJoinsfSimpleForumForum($c);
+    
+    if ($objects) 
     {
-      $topic = $topic_hash[$rs->getInt(1)];
-      $topic->setIsNew(false);
+      return $objects[0];
     }
-    
-    return $topic_hash;
+    return null;
   }
-  
   public static function getLatestCriteria()
   {
     $c = new Criteria();
@@ -64,7 +49,7 @@ class sfSimpleForumPostPeer extends BasesfSimpleForumPostPeer
     $pager = new sfPropelPager('sfSimpleForumPost', $max_per_page);
     $pager->setPage($page);
     $pager->setCriteria($c);
-    $pager->setPeerMethod('doSelectJoinAllExceptsfGuardUser');
+    $pager->setPeerMethod('doSelectJoinsfSimpleForumForum');
     $pager->init();
     
     return $pager;
@@ -129,7 +114,7 @@ class sfSimpleForumPostPeer extends BasesfSimpleForumPostPeer
     $pager = new sfPropelPager('sfSimpleForumPost', $max_per_page);
     $pager->setPage($page);
     $pager->setCriteria($c);
-    $pager->setPeerMethod('doSelectJoinTopicAndForum');
+    $pager->setPeerMethod('doSelectJoinsfSimpleForumForum');
     $pager->init();
 
     return $pager;
@@ -161,7 +146,7 @@ class sfSimpleForumPostPeer extends BasesfSimpleForumPostPeer
     $pager = new sfPropelPager('sfSimpleForumPost', $max_per_page);
     $pager->setPage($page);
     $pager->setCriteria($c);
-    $pager->setPeerMethod('doSelectJoinTopicAndForum');
+    $pager->setPeerMethod('doSelectJoinsfSimpleForumForum');
     $pager->init();
 
     return $pager;

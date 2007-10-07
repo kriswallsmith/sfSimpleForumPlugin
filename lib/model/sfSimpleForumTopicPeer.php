@@ -9,6 +9,35 @@
  */ 
 class sfSimpleForumTopicPeer extends BasesfSimpleForumTopicPeer
 {
+  public static function setIsNewForUser($topics, $user_id)
+  {
+    $topic_ids  = array();
+    $topic_hash = array();
+    foreach ($topics as $topic)
+    {
+      // A topic is new unless we can find a view from the user for it
+      $topic->setIsNew(true);
+      $id = $topic->getId();
+      $topic_ids[] = $id;
+      $topic_hash[$id] = $topic;
+    }
+    
+    $c = new Criteria();
+    $c->clearSelectColumns();
+    $c->addSelectColumn(sfSimpleForumTopicViewPeer::TOPIC_ID);
+    $c->add(sfSimpleForumTopicViewPeer::USER_ID, $user_id);
+    $c->add(sfSimpleForumTopicViewPeer::TOPIC_ID, $topic_ids, Criteria::IN);
+    $rs = sfSimpleForumTopicViewPeer::doSelectRS($c);
+    
+    while($rs->next())
+    {
+      $topic = $topic_hash[$rs->getInt(1)];
+      $topic->setIsNew(false);
+    }
+    
+    return $topic_hash;
+  }
+  
   public static function getLatestCriteria()
   {
     $c = new Criteria();

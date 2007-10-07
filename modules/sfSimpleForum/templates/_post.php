@@ -12,7 +12,7 @@
     <div class="post_details">
       <?php echo link_to($post->getsfSimpleForumForum()->getName(), 'sfSimpleForum/forum?forum_name='.$post->getsfSimpleForumForum()->getStrippedName()) ?>
      &raquo;
-      <?php echo link_to($post->getsfSimpleForumTopic()->getTitle(), 'sfSimpleForum/post?id='.$post->getId()) ?>
+      <?php echo link_to($post->getTitle(), 'sfSimpleForum/post?id='.$post->getId()) ?>
       <?php endif ?>
     </div>
     <div class="post_content"><a name="post<?php echo $post->getId() ?>"></a>

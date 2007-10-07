@@ -59,7 +59,7 @@ class BasesfSimpleForumActions extends sfActions
     $this->posts = sfSimpleForumPostPeer::getLatest(
       sfConfig::get('app_sfSimpleForumPlugin_feed_max', 10)
     );
-    $this->rule = 'sfSimpleForum/latestPosts';
+    $this->rule = $this->getModuleName().'/latestPosts';
     $this->feed_title = $this->getFeedTitle();
     
     return $this->renderText($this->getFeedFromObjects($this->posts));
@@ -89,7 +89,7 @@ class BasesfSimpleForumActions extends sfActions
     $this->topics = sfSimpleForumTopicPeer::getLatest(
       sfConfig::get('app_sfSimpleForumPlugin_feed_max', 10)
     );
-    $this->rule = 'sfSimpleForum/latestTopics';
+    $this->rule = $this->getModuleName().'/latestTopics';
     $this->feed_title = $this->getLatestTopicsFeedTitle();
     
     return $this->renderText($this->getFeedFromObjects($this->topics));
@@ -118,7 +118,7 @@ class BasesfSimpleForumActions extends sfActions
     if (sfConfig::get('app_sfSimpleForumPlugin_count_views', true) && $this->getUser()->isAuthenticated())
     {
       // FIXME: When Propel can do a right join with multiple on conditions, merge this query with the pager's one
-      $this->topics = sfSimpleForumPostPeer::setIsNewForUser($this->topics, $this->getUser()->getGuardUser()->getId());
+      $this->topics = sfSimpleForumTopicPeer::setIsNewForUser($this->topics, $this->getUser()->getGuardUser()->getId());
     }
   }
 
@@ -140,7 +140,7 @@ class BasesfSimpleForumActions extends sfActions
     $this->posts = $this->forum->getPosts(
       sfConfig::get('app_sfSimpleForumPlugin_feed_max', 10)
     );
-    $this->rule = 'sfSimpleForum/forumLatestPosts?forum_name='.$this->name;
+    $this->rule = $this->getModuleName().'/forumLatestPosts?forum_name='.$this->name;
     
     return $this->renderText($this->getFeedFromObjects($this->posts));
   }
@@ -195,7 +195,7 @@ class BasesfSimpleForumActions extends sfActions
     );
     $this->forward404Unless($this->posts);
     
-    $this->rule = 'sfSimpleForum/topic?id='.$this->getRequestParameter('id').'&stripped_title='.$this->getRequestParameter('forum_name');
+    $this->rule = $this->getModuleName().'/topic?id='.$this->getRequestParameter('id').'&stripped_title='.$this->getRequestParameter('forum_name');
     
     return $this->renderText($this->getFeedFromObjects($this->posts));
   }
@@ -221,7 +221,7 @@ class BasesfSimpleForumActions extends sfActions
     $topic = $post->getTopic();
     $position = $post->getPositionInTopic();
     $page = ceil(($position + 1) / sfConfig::get('app_sfSimpleForumPlugin_max_per_page', 10));
-      $this->redirect('sfSimpleForum/topic?id='.$topic->getId().'&stripped_title='.$topic->getStrippedTitle().'&page='.$page.'#post'.$post->getId());
+      $this->redirect($this->getModuleName().'/topic?id='.$topic->getId().'&stripped_title='.$topic->getStrippedTitle().'&page='.$page.'#post'.$post->getId());
   }
   
   // One user
@@ -247,7 +247,7 @@ class BasesfSimpleForumActions extends sfActions
       sfConfig::get('app_sfSimpleForumPlugin_feed_max', 10)
     );
     
-    $this->rule = 'sfSimpleForum/userLatestPosts?username='.$this->username;
+    $this->rule = $this->getModuleName().'/userLatestPosts?username='.$this->username;
     $this->feed_title = $this->getUserLatestPostsFeedTitle();
     
     return $this->renderText($this->getFeedFromObjects($this->posts));
@@ -283,7 +283,7 @@ class BasesfSimpleForumActions extends sfActions
       $this->user->getId(),
       sfConfig::get('app_sfSimpleForumPlugin_feed_max', 10)
     );
-    $this->rule = 'sfSimpleForum/latestUserTopics?username='.$this->username;
+    $this->rule = $this->getModuleName().'/latestUserTopics?username='.$this->username;
     $this->feed_title = $this->getUserLatestTopicsFeedTitle();
     
     return $this->renderText($this->getFeedFromObjects($this->topics));
@@ -402,7 +402,7 @@ class BasesfSimpleForumActions extends sfActions
   {
     $position = $post->getPositionInTopic();
     $page = ceil(($position + 1) / sfConfig::get('app_sfSimpleForumPlugin_max_per_page', 10));
-    $this->redirect('sfSimpleForum/topic?id='.$post->getTopic()->getId().'&stripped_title='.$post->getTopic()->getStrippedTitle().'&page='.$page.'#post'.$post->getId());    
+    $this->redirect($this->getModuleName().'/topic?id='.$post->getTopic()->getId().'&stripped_title='.$post->getTopic()->getStrippedTitle().'&page='.$page.'#post'.$post->getId());    
   }
   
   public function executeDeletePost()
@@ -416,13 +416,13 @@ class BasesfSimpleForumActions extends sfActions
       // it is the last post of the topic, so delete the whole topic
       $topic->delete();
       $forum = $post->getsfSimpleForumForum();
-      $this->redirect('sfSimpleForum/forum?forum_name='.$forum->getStrippedName());
+      $this->redirect($this->getModuleName().'/forum?forum_name='.$forum->getStrippedName());
     }
     else
     {
       // delete only one message and redirect to the topic
       $post->delete();
-      $this->redirect('sfSimpleForum/topic?id='.$topic->getId().'&stripped_title='.$topic->getStrippedTitle());
+      $this->redirect($this->getModuleName().'/topic?id='.$topic->getId().'&stripped_title='.$topic->getStrippedTitle());
     }
   }
   
@@ -434,7 +434,7 @@ class BasesfSimpleForumActions extends sfActions
     $topic->delete();
     
     $forum = $topic->getsfSimpleForumForum();
-    $this->redirect('sfSimpleForum/forum?forum_name='.$forum->getStrippedName());
+    $this->redirect($this->getModuleName().'/forum?forum_name='.$forum->getStrippedName());
   }
   
   // stick/unstick a topic
@@ -448,7 +448,7 @@ class BasesfSimpleForumActions extends sfActions
     $topic->leaveUpdatedAtUnchanged();
     $topic->save();
     
-    $this->redirect('sfSimpleForum/topic?id='.$topic->getId());
+    $this->redirect($this->getModuleName().'/topic?id='.$topic->getId());
   }
   
   // lock/unlock a topic
@@ -462,6 +462,6 @@ class BasesfSimpleForumActions extends sfActions
     $topic->leaveUpdatedAtUnchanged();
     $topic->save();
     
-    $this->redirect('sfSimpleForum/topic?id='.$topic->getId());
+    $this->redirect($this->getModuleName().'/topic?id='.$topic->getId());
   }
 }

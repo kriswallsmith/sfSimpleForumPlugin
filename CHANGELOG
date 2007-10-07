@@ -1,5 +1,7 @@
 == Trunk ==
 
+ * francois: Further optimized queries
+ 
 == 2007-10-03 | 0.6.3 Beta ==
 
  * francois: Extended the cache coverage

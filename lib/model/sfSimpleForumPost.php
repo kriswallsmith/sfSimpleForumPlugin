@@ -123,4 +123,8 @@ class sfSimpleForumPost extends BasesfSimpleForumPost
     return 'sfSimpleForum/topic?id='.$this->getTopicId().'&stripped_title='.$this->getsfSimpleForumTopic()->getStrippedTitle();
   }
   
+  public function getCreationTimestamp()
+  {
+    return $this->getCreatedAt('U');
+  }
 }
