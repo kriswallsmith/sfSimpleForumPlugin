@@ -1,5 +1,9 @@
 == Trunk ==
 
+== 2007-10-10 | 0.6.4 Beta ==
+
+ * francois: Fixed missing files in package definition (#2336)
+ * francois: Fixed empty forums do not appear in the forum list (#2330)
  * francois: Added a new partial to allow third-party profile enhancements
  * francois: Further optimized queries
  

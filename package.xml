@@ -13,10 +13,10 @@ http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
   <email>francois.zaninotto@symfony-project.com</email>
   <active>yes</active>
  </lead>
- <date>2007-10-03</date>
+ <date>2007-10-10</date>
  <version>
-   <release>0.6.3</release>
-   <api>0.6.3</api>
+   <release>0.6.4</release>
+   <api>0.6.4</api>
  </version>
  <stability>
   <release>beta</release>
@@ -32,6 +32,7 @@ http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
 
      <dir name="config">
        <file role="data" name="schema.yml" />
+       <file role="data" name="schemaConfig.php" />
      </dir>
 
      <dir name="data">
@@ -76,8 +77,9 @@ http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
            <file role="data" name="BasesfSimpleForumComponents.class.php" />
          </dir>
          <dir name="templates">
-           <file role="data" name="_author.php" />
            <file role="data" name="_add_post_form.php" />
+           <file role="data" name="_author.php" />
+           <file role="data" name="_author_name.php" />
            <file role="data" name="_figures.php" />
            <file role="data" name="_forum.php" />
            <file role="data" name="_latestPosts.php" />
@@ -110,12 +112,12 @@ http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
        </dir>
        <dir name="images">
          <file role="data" name="button_bg.gif" />
-         <file role="data" name="feed-icon.png" />
-         <file role="data" name="th_bg.gif" />
-         <file role="data" name="comments.png" />
          <file role="data" name="comment.png" />
+         <file role="data" name="comments.png" />
+         <file role="data" name="feed-icon.png" />
          <file role="data" name="lock.png" />
          <file role="data" name="note.png" />
+         <file role="data" name="th_bg.gif" />
        </dir>
      </dir>
    </dir>
