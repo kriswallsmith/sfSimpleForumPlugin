@@ -43,6 +43,12 @@ sfSimpleForumForum:
     name: General discussion
     description: "If you don't know where to write, try here"
     category_id: c2
+    rank:        1
+  f4:
+    name: Empty discussion
+    description: This discussion is emtpty but should still appear in the forum list
+    category_id: c2
+    rank:        2
 
 sfSimpleForumTopic:
   topic_1:

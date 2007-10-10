@@ -28,8 +28,13 @@
     'feed_title'          => $feed_title
   )) ?>
   
-  <?php include_partial('sfSimpleForum/topic_list', array('topics' => $topics, 'include_forum' => false)) ?>
-  
-  <?php echo pager_navigation($topic_pager, 'sfSimpleForum/forum?forum_name='.$forum->getStrippedName()) ?>
+  <?php if ($forum->getNbTopics()): ?>
+    
+    <?php include_partial('sfSimpleForum/topic_list', array('topics' => $topics, 'include_forum' => false)) ?>
+    
+    <?php echo pager_navigation($topic_pager, 'sfSimpleForum/forum?forum_name='.$forum->getStrippedName()) ?>    
+  <?php else: ?>
+    <p><?php echo __('There is no topic in this discussion yet. Perhaps you would like to %start%?', array('%start%' =>  link_to(__('start a new one'), 'sfSimpleForum/createTopic?forum_name='.$forum->getStrippedName()))) ?></p>
+  <?php endif; ?>
 
 </div>
