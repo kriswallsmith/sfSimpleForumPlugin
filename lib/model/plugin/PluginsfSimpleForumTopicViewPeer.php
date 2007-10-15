@@ -7,6 +7,6 @@
  *
  * @package plugins.sfSimpleForumPlugin.lib.model
  */ 
-class sfSimpleForumTopicViewPeer extends PluginsfSimpleForumTopicViewPeer
+class PluginsfSimpleForumTopicViewPeer extends BasesfSimpleForumTopicViewPeer
 {
 }

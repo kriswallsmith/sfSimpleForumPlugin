@@ -7,6 +7,6 @@
  *
  * @package plugins.sfSimpleForumPlugin.lib.model
  */ 
-class sfSimpleForumTopicView extends PluginsfSimpleForumTopicView
+class PluginsfSimpleForumTopicView extends BasesfSimpleForumTopicView
 {
 }

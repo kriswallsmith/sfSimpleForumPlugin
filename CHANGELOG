@@ -1,5 +1,8 @@
 == Trunk ==
 
+ * francois: Switched schema configuration method to sfPropelAlternativeSchemaPlugin (now a prerequisite)
+ * francois: Added a supplementary customization layer to the model classes
+ 
 == 2007-10-10 | 0.6.4 Beta ==
 
  * francois: Fixed missing files in package definition (#2336)

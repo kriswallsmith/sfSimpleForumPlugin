@@ -32,7 +32,6 @@ http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
 
      <dir name="config">
        <file role="data" name="schema.yml" />
-       <file role="data" name="schemaConfig.php" />
      </dir>
 
      <dir name="data">
@@ -47,6 +46,18 @@ http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
          <file role="data" name="sfSimpleForumHelper.php" />
        </dir>
        <dir name="model">
+         <dir name="plugin">
+           <file role="data" name="PluginsfSimpleForumCategory.php" />
+           <file role="data" name="PluginsfSimpleForumCategoryPeer.php" />
+           <file role="data" name="PluginsfSimpleForumForum.php" />
+           <file role="data" name="PluginsfSimpleForumForumPeer.php" />
+           <file role="data" name="PluginsfSimpleForumPost.php" />
+           <file role="data" name="PluginsfSimpleForumPostPeer.php" />
+           <file role="data" name="PluginsfSimpleForumTopic.php" />
+           <file role="data" name="PluginsfSimpleForumTopicPeer.php" />
+           <file role="data" name="PluginsfSimpleForumTopicView.php" />
+           <file role="data" name="PluginsfSimpleForumTopicViewPeer.php" />
+         </dir>
          <file role="data" name="sfSimpleForumCategory.php" />
          <file role="data" name="sfSimpleForumCategoryPeer.php" />
          <file role="data" name="sfSimpleForumForum.php" />

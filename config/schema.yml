@@ -1,64 +1,64 @@
-<?php include_once('schemaConfig.php') ?>
-<?php start_schema() ?>
-
-%connection%:
-  
-  %category_table%:
-    _attributes:   { phpName: sfSimpleForumCategory, package: plugins.sfSimpleForumPlugin.lib.model }
-    id:
-    name:          varchar(255)
-    stripped_name: varchar(255)
-    description:   longvarchar
-    rank:          integer
-    created_at:
+<?php if(!is_callable(array('sfPropelDatabaseSchema', 'loadNewYaml'))) throw new Exception('You must install the sfPropelAlternativeSchemaPlugin to use the sfSimpleForum') ?>
+classes:
+  sfSimpleForumCategory:
+    package:         plugins.sfSimpleForumPlugin.lib.model
+    columns:
+      id:
+      name:          varchar(255)
+      stripped_name: varchar(255)
+      description:   longvarchar
+      rank:          integer
+      created_at:
     
-  %forum_table%:
-    _attributes:   { phpName: sfSimpleForumForum, package: plugins.sfSimpleForumPlugin.lib.model }
-    id:
-    name:          varchar(255)
-    description:   longvarchar
-    rank:          integer
-    category_id:   { type: integer, foreignTable: %category_table%, foreignReference: id, onDelete: cascade }
-    created_at:
-    updated_at:
-    # performance enhancers
-    stripped_name: { type: varchar, size: 255, index: unique }
-    latest_post_id: { type: integer, foreignTable: %post_table%, foreignReference: id, onDelete: setnull }
-    nb_posts:      bigint
-    nb_topics:     bigint
+  sfSimpleForumForum:
+    package:         plugins.sfSimpleForumPlugin.lib.model
+    columns:
+      id:
+      name:          varchar(255)
+      description:   longvarchar
+      rank:          integer
+      category_id:   { type: integer, foreignClass: sfSimpleForumCategory, foreignReference: id, onDelete: cascade }
+      created_at:
+      updated_at:
+      # performance enhancers
+      stripped_name: { type: varchar, size: 255, index: unique }
+      latest_post_id: { type: integer, foreignClass: sfSimpleForumPost, foreignReference: id, onDelete: setnull }
+      nb_posts:      bigint
+      nb_topics:     bigint
     
-  %topic_table%:
-    _attributes:   { phpName: sfSimpleForumTopic, package: plugins.sfSimpleForumPlugin.lib.model }    
-    id: 
-    title:         varchar(255)
-    is_sticked:    { type: boolean, default: false }
-    is_locked:     { type: boolean, default: false }
-    forum_id:      { type: integer, foreignTable: %forum_table%, foreignReference: id, onDelete: cascade }
-    created_at:
-    updated_at:
-    # performance enhancers
-    latest_post_id: { type: integer, foreignTable: %post_table%, foreignReference: id, onDelete: setnull }
-    user_id:       { type: integer, foreignTable: %user_table%, foreignReference: %user_id%, onDelete: setnull }
-    stripped_title: varchar(255)
-    nb_posts:      { type: bigint, default: 0 }
-    nb_views:      { type: bigint, default: 0 }
+  sfSimpleForumTopic:
+    package:         plugins.sfSimpleForumPlugin.lib.model
+    columns:
+      id: 
+      title:         varchar(255)
+      is_sticked:    { type: boolean, default: false }
+      is_locked:     { type: boolean, default: false }
+      forum_id:      { type: integer, foreignClass: sfSimpleForumForum, foreignReference: id, onDelete: cascade }
+      created_at:
+      updated_at:
+      # performance enhancers
+      latest_post_id: { type: integer, foreignClass: sfSimpleForumPost, foreignReference: id, onDelete: setnull }
+      user_id:       { type: integer, foreignClass: sfGuardUser, foreignReference: id, onDelete: setnull }
+      stripped_title: varchar(255)
+      nb_posts:      { type: bigint, default: 0 }
+      nb_views:      { type: bigint, default: 0 }
     
-  %post_table%:
-    _attributes:   { phpName: sfSimpleForumPost, package: plugins.sfSimpleForumPlugin.lib.model }    
-    id: 
-    title:         varchar(255)
-    content:       longvarchar
-    topic_id:      { type: integer, foreignTable: %topic_table%, foreignReference: id, onDelete: cascade } 
-    user_id:       { type: integer, foreignTable: %user_table%, foreignReference: %user_id%, onDelete: cascade }
-    created_at:
-    # performance enhancers
-    forum_id:      { type: integer, foreignTable: %forum_table%, foreignReference: id, onDelete: cascade }
-    author_name:   varchar(255)
+  sfSimpleForumPost:
+    package:         plugins.sfSimpleForumPlugin.lib.model
+    columns:
+      id: 
+      title:         varchar(255)
+      content:       longvarchar
+      topic_id:      { type: integer, foreignClass: sfSimpleForumTopic, foreignReference: id, onDelete: cascade } 
+      user_id:       { type: integer, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade }
+      created_at:
+      # performance enhancers
+      forum_id:      { type: integer, foreignClass: sfSimpleForumForum, foreignReference: id, onDelete: cascade }
+      author_name:   varchar(255)
     
-  %topic_view_table%:
-    _attributes:   { phpName: sfSimpleForumTopicView, package: plugins.sfSimpleForumPlugin.lib.model }
-    user_id:       { type: integer, foreignTable: %user_table%, foreignReference: %user_id%, onDelete: cascade, primaryKey: true }
-    topic_id:      { type: integer, foreignTable: %topic_table%, foreignReference: id, onDelete: cascade, primaryKey: true }
-    created_at:
-
-<?php return end_schema() ?>
+  sfSimpleForumTopicView:
+    package:         plugins.sfSimpleForumPlugin.lib.model
+    columns:
+      user_id:       { type: integer, foreignClass: sfGuardUser, foreignReference: id, onDelete: cascade, primaryKey: true }
+      topic_id:      { type: integer, foreignClass: sfSimpleForumTopic, foreignReference: id, onDelete: cascade, primaryKey: true }
+      created_at:

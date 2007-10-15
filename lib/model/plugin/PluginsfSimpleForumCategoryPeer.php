@@ -7,6 +7,6 @@
  *
  * @package plugins.sfSimpleForumPlugin.lib.model
  */ 
-class sfSimpleForumCategoryPeer extends PluginsfSimpleForumCategoryPeer
+class PluginsfSimpleForumCategoryPeer extends BasesfSimpleForumCategoryPeer
 {
 }
