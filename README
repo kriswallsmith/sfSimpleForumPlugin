@@ -30,7 +30,6 @@ Please note that this plugin is in active development. If you want to help and i
 == Requirements ==
 
 The prerequisites for using the `sfSimpleForum` plugin are:
- - You must install the `sfPropelAlternativeSchemaPlugin`
  - As the plugin doesn't contain a user management module, the project where you install it must have a table managing authors, or users (whatever the name), and the related Propel class must have a `__toString()` method. Both these conditions are satisfied by the [http://trac.symfony-project.com/trac/wiki/sfFeed2Plugin sfGuardPlugin], so installing this plugin is a good choice.
  - If you want to use RSS feeds, you must install the [http://trac.symfony-project.com/trac/wiki/sfFeed2Plugin sfFeed2Plugin].
  
@@ -107,7 +106,7 @@ An example layout for a standard display is given below.
 
 === Schema customization ===
 
-The schema file located under `config/schema.yml` uses an alternative schema syntax, allowed by the `sfPropelAlternativeSchemaPlugin`. This means that you can override this schema by creating a `sfSimpleForumPlugin_schema.custom.yml` file under your project's `config/` directory. This allows you to customize the connection name, table names, and even foreign classs associations. Refer to the [http://trac.symfony-project.com/wiki/sfPropelAlternativeSchemaPluginsfPropelAlternativeSchemaPlugin README file] for more information.
+If you install the `sfPropelAlternativeSchemaPlugin`, you can customize this plugin's schema by creating a `sfSimpleForumPlugin_schema.custom.yml` file under your project's `config/` directory. This allows you to customize the connection name, table names, and even foreign class associations. Refer to the [http://trac.symfony-project.com/wiki/sfPropelAlternativeSchemaPluginsfPropelAlternativeSchemaPlugin README file] for more information.
 
 === app.yml ===
 

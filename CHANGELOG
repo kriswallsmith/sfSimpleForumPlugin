@@ -1,5 +1,6 @@
 == Trunk ==
 
+ * francois: Switched back to normal schema since sfPropelAlternativeSchemaPlugin can now customize those too
  * francois: Switched schema configuration method to sfPropelAlternativeSchemaPlugin (now a prerequisite)
  * francois: Added a supplementary customization layer to the model classes
  
