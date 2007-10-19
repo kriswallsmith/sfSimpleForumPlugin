@@ -9,6 +9,11 @@
  */ 
 class PluginsfSimpleForumPost extends BasesfSimpleForumPost
 {
+  public function __toString()
+  {
+    return $this->getTitle();
+  }
+
   public function getUser()
   {
     return $this->getsfGuardUser();

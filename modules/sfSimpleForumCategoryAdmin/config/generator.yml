@@ -1,0 +1,19 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      sfSimpleForumCategory
+    theme:            default
+    
+    fields:
+    
+    list:
+      title: Category Administration
+      display: [=name, description, rank]
+      object_actions:
+        _edit: -
+        _delete: -
+    
+    edit:
+      title: Edit category "%%name%%"
+      display: [name, description, rank, _forums]
+

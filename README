@@ -32,6 +32,8 @@ Please note that this plugin is in active development. If you want to help and i
 The prerequisites for using the `sfSimpleForum` plugin are:
  - As the plugin doesn't contain a user management module, the project where you install it must have a table managing authors, or users (whatever the name), and the related Propel class must have a `__toString()` method. Both these conditions are satisfied by the [http://trac.symfony-project.com/trac/wiki/sfFeed2Plugin sfGuardPlugin], so installing this plugin is a good choice.
  - If you want to use RSS feeds, you must install the [http://trac.symfony-project.com/trac/wiki/sfFeed2Plugin sfFeed2Plugin].
+
+== Installation ==
  
 To install the plugin for a symfony project, the usual process is to use the symfony command line:
 {{{
@@ -66,6 +68,21 @@ all:
 Start using the plugin by browsing to the frontend module's default page:
 {{{ 
 http://myproject/frontend_dev.php/sfSimpleForum
+}}}
+
+If you want to enable the plugin administration interface, you have to enable two more modules. You can do so in your main application or in a backend application. the following example is for a 'backend' application:
+
+{{{
+// in myproject/apps/backend/config/settings.yml
+all:
+  .settings:
+    enabled_modules:        [default, sfSimpleForumCategoryAdmin, sfSimpleForumForumAdmin]
+}}}
+
+Configure the plugin categories and forums by browsing to the administration modules default page:
+{{{ 
+http://myproject/backend_dev.php/sfSimpleForumCategoryAdmin
+http://myproject/backend_dev.php/sfSimpleForumForumAdmin
 }}}
 
 == Slots ==
@@ -206,5 +223,4 @@ all:
  * Search engine
  * Subscribe to a topic by email
  * Make the plugin sfGuard-independent (cf sfSimpleBlogPlugin)
- * Forum administration (module to create and arrange forums and categories)
  * Package with other plugins into an application

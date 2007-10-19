@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      sfSimpleForumForum
+    theme:            default
+    
+    fields:
+      _category: { name: Category }
+      nb_posts: { name: Posts }
+      nb_topics: { name: Topics }
+    
+    list:
+      title: Forum Administration
+      display: [=name, description, _category, rank, nb_posts, nb_topics]
+      filters: [name, category_id]
+      object_actions:
+        _edit: -
+        _delete: -
+    
+    edit:
+      title: Edit forum "%%name%%"
+      display: [name, stripped_name, description, category_id, rank]

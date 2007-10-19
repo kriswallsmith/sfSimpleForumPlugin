@@ -13,6 +13,7 @@ class PluginsfSimpleForumCategory extends BasesfSimpleForumCategory
   {
     $c = new Criteria();
     $c->add(sfSimpleForumForumPeer::CATEGORY_ID, $this->getId());
+    $c->addAscendingOrderByColumn(sfSimpleForumForumPeer::RANK);
     return sfSimpleForumForumPeer::doSelect($c);
   }
   
