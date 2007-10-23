@@ -30,7 +30,7 @@ Please note that this plugin is in active development. If you want to help and i
 == Requirements ==
 
 The prerequisites for using the `sfSimpleForum` plugin are:
- - As the plugin doesn't contain a user management module, the project where you install it must have a table managing authors, or users (whatever the name), and the related Propel class must have a `__toString()` method. Both these conditions are satisfied by the [http://trac.symfony-project.com/trac/wiki/sfFeed2Plugin sfGuardPlugin], so installing this plugin is a good choice.
+ - As the plugin doesn't contain a user management module, the project where you install it must have a table managing authors, or users (whatever the name), and the related Propel class must have a `__toString()` method. Both these conditions are satisfied by the [http://trac.symfony-project.com/trac/wiki/sfGuardPlugin sfGuardPlugin], so installing this plugin is a good choice.
  - If you want to use RSS feeds, you must install the [http://trac.symfony-project.com/trac/wiki/sfFeed2Plugin sfFeed2Plugin].
 
 == Installation ==
