@@ -1,5 +1,7 @@
 == Trunk ==
 
+== 2007-11-08 | 0.6.5 Beta ==
+
  * francois: Added two modules for backend administration
  * francois: Removed schema configuration file (use sfPropelAlternativeSchemaPlugin if you must customize the schema)
  * francois: Added a supplementary customization layer to the model classes
