@@ -115,6 +115,31 @@ http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
            <file role="data" name="addTopic.yml" />
          </dir>
        </dir>
+       <dir name="sfSimpleForumCategoryAdmin">
+         <dir name="actions">
+           <file role="data" name="actions.class.php" />
+         </dir>
+         <dir name="config">
+           <file role="data" name="generator.yml" />
+           <file role="data" name="view.yml" />
+         </dir>
+         <dir name="templates">
+           <file role="data" name="_forums.php" />
+         </dir>
+       </dir>
+       <dir name="sfSimpleForumForumAdmin">
+         <dir name="actions">
+           <file role="data" name="actions.class.php" />
+         </dir>
+         <dir name="config">
+           <file role="data" name="generator.yml" />
+           <file role="data" name="view.yml" />
+         </dir>
+         <dir name="templates">
+           <file role="data" name="_category.php" />
+         </dir>
+       </dir>
+       
      </dir>
 
      <dir name="web">
