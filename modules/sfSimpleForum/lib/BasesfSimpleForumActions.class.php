@@ -118,7 +118,7 @@ class BasesfSimpleForumActions extends sfActions
     if (sfConfig::get('app_sfSimpleForumPlugin_count_views', true) && $this->getUser()->isAuthenticated())
     {
       // FIXME: When Propel can do a right join with multiple on conditions, merge this query with the pager's one
-      $this->topics = sfSimpleForumTopicPeer::setIsNewForUser($this->topics, $this->getUser()->getGuardUser()->getId());
+      $this->topics = sfSimpleForumTopicPeer::setIsNewForUser($this->topics, sfSimpleForumTools::getConnectedUserId());
     }
   }
 
@@ -181,7 +181,7 @@ class BasesfSimpleForumActions extends sfActions
       }
       if($this->getUser()->isAuthenticated())
       {
-        $this->topic->addViewForUser($this->getUser()->getGuardUser()->getId());
+        $this->topic->addViewForUser(sfSimpleForumTools::getConnectedUserId());
       }
     }
   }
@@ -229,7 +229,7 @@ class BasesfSimpleForumActions extends sfActions
   public function executeUserLatestPosts()
   {
     $this->setUserVars();
-        
+    
     $this->post_pager = sfSimpleForumPostPeer::getForUserPager(
       $this->user->getId(),
       $this->getRequestParameter('page', 1),
@@ -301,7 +301,7 @@ class BasesfSimpleForumActions extends sfActions
   protected function setUserVars()
   {
     $this->username = $this->getRequestParameter('username');
-    $this->user = sfGuardUserPeer::retrieveByUsername($this->username);
+    $this->user = sfSimpleForumTools::getUserByUsername($this->username);
     $this->forward404Unless($this->user);
   }
   
@@ -357,7 +357,7 @@ class BasesfSimpleForumActions extends sfActions
     $topic = new sfSimpleForumTopic();
     $topic->setsfSimpleForumForum($forum);
     $topic->setTitle($this->getRequestParameter('title'));
-    $topic->setUserId($this->getUser()->getGuardUser()->getId());
+    $topic->setUserId(sfSimpleForumTools::getConnectedUserId());
     if ($this->getUser()->hasCredential('moderator'))
     {
       $topic->setIsSticked($this->getRequestParameter('is_sticked', 0));
@@ -367,7 +367,7 @@ class BasesfSimpleForumActions extends sfActions
         
     $post = new sfSimpleForumPost();
     $post->setContent($this->getRequestParameter('body'));
-    $post->setUserId($this->getUser()->getGuardUser()->getId());
+    $post->setUserId(sfSimpleForumTools::getConnectedUserId());
     $post->setsfSimpleForumTopic($topic);
     $post->save();
     
@@ -391,7 +391,7 @@ class BasesfSimpleForumActions extends sfActions
     
     $post = new sfSimpleForumPost();
     $post->setContent($this->getRequestParameter('body'));
-    $post->setUserId($this->getUser()->getGuardUser()->getId());
+    $post->setUserId(sfSimpleForumTools::getConnectedUserId());
     $post->setTopicId($topic->getId());
     $post->save();
     

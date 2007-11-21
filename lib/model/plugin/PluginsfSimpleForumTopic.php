@@ -24,7 +24,7 @@ class PluginsfSimpleForumTopic extends BasesfSimpleForumTopic
   
   public function getUser()
   {
-    return $this->getsfGuardUser();
+    return sfSimpleForumTools::getUser($this);
   }
   
   public function setTitle($title)

@@ -1,5 +1,7 @@
 == Trunk ==
 
+ * nicolas: Removed dependency on sfGuardUser
+
 == 2007-11-08 | 0.6.5 Beta ==
 
  * francois: Added two modules for backend administration

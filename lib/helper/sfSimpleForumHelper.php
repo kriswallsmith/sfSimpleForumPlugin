@@ -1,12 +1,13 @@
 <?php
 
-function forum_breadcrumb($params)
+function forum_breadcrumb($params, $options = array())
 {
   if(!$params) return;
   
   $first = true;
   $title = '';
-  $html = '<ul id="forum_navigation">';
+  $id = isset($options['id']) ? $options['id'] : 'forum_navigation';
+  $html = '<ul id="'.$id.'">';
   foreach ($params as $step) 
   { 
     $separator = $first ? '' : sfConfig::get('app_sfSimpleForumPlugin_breadcrumb_separator', ' » ');

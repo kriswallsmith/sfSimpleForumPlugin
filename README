@@ -125,6 +125,8 @@ An example layout for a standard display is given below.
 
 If you install the `sfPropelAlternativeSchemaPlugin`, you can customize this plugin's schema by creating a `sfSimpleForumPlugin_schema.custom.yml` file under your project's `config/` directory. This allows you to customize the connection name, table names, and even foreign class associations. Refer to the [http://trac.symfony-project.com/wiki/sfPropelAlternativeSchemaPluginsfPropelAlternativeSchemaPlugin README file] for more information.
 
+You can choose to use another user management system than sfGuard. In that case, you need to change the foreign key associations for every `user_id` column with a custom schema. You also need to change the `user_class` parameter in your `app.yml` (see below).
+
 === app.yml ===
 
 Some of the features of the plugin can be altered by configuration. To do so, add some of the following lines to your application's `app.yml`:
@@ -132,18 +134,20 @@ Some of the features of the plugin can be altered by configuration. To do so, ad
 {{{
 all:
   sfSimpleForumPlugin:
-    forum_name:             My symfony forum
-    display_categories:     true
-    use_feeds:              true  # requires sfFeed2Plugin
-    count_views:            true  # count each time a topic is viewed. Turn off to increase performance
-    max_per_block:          10    # maximum number of links displayed in a block
-    include_breadcrumb:     true  # include breadcrumb slot content. Turn off if you don't use the breadcrumb.
-    breadcrumb_separator:   ' » ' # separator for breadcrumb trail
-    max_per_page:           10    # maximum threads or messages per page
-    pages_displayed:        5     # maximum pages displayed by the pager navigation
-    feed_max:               10    # maximum messages served by feed
-    show_author_details:    false # display number of messages of post authors
+    forum_name:              My symfony forum
+    display_categories:      true
+    use_feeds:               true  # requires sfFeed2Plugin
+    count_views:             true  # count each time a topic is viewed. Turn off to increase performance
+    max_per_block:           10    # maximum number of links displayed in a block
+    include_breadcrumb:      true  # include breadcrumb slot content. Turn off if you don't use the breadcrumb.
+    breadcrumb_separator:    ' » ' # separator for breadcrumb trail
+    max_per_page:            10    # maximum threads or messages per page
+    pages_displayed:         5     # maximum pages displayed by the pager navigation
+    feed_max:                10    # maximum messages served by feed
+    show_author_details:     false # display number of messages of post authors
     allow_new_topic_outside_forum: true
+    user_class:              sfGuardUser         # name of the class used to manage users
+    retrieve_by_name_method: retrieveByUsername  # name of the static method used to retrieve a user by its username
 }}}
 
 === Routing rules ===

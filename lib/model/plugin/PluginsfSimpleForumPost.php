@@ -16,7 +16,7 @@ class PluginsfSimpleForumPost extends BasesfSimpleForumPost
 
   public function getUser()
   {
-    return $this->getsfGuardUser();
+    return sfSimpleForumTools::getUser($this);
   }
   
   public function setUserId($id)
