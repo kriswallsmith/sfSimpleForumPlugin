@@ -226,5 +226,4 @@ all:
  * Add images to make the default style less ugly
  * Search engine
  * Subscribe to a topic by email
- * Make the plugin sfGuard-independent (cf sfSimpleBlogPlugin)
  * Package with other plugins into an application

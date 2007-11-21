@@ -1,5 +1,6 @@
 == Trunk ==
 
+ * nicols: Slightly refactored pagination helper
  * nicolas: Removed dependency on sfGuardUser
 
 == 2007-11-08 | 0.6.5 Beta ==
