@@ -1,6 +1,7 @@
 == Trunk ==
 
- * nicols: Slightly refactored pagination helper
+ * Pascal.Borreli : Fixed incorrect use of a block element inside a inline element (#2628)
+ * nicolas: Slightly refactored pagination helper
  * nicolas: Removed dependency on sfGuardUser
 
 == 2007-11-08 | 0.6.5 Beta ==
@@ -8,14 +9,14 @@
  * francois: Added two modules for backend administration
  * francois: Removed schema configuration file (use sfPropelAlternativeSchemaPlugin if you must customize the schema)
  * francois: Added a supplementary customization layer to the model classes
- 
+
 == 2007-10-10 | 0.6.4 Beta ==
 
  * francois: Fixed missing files in package definition (#2336)
  * francois: Fixed empty forums do not appear in the forum list (#2330)
  * francois: Added a new partial to allow third-party profile enhancements
  * francois: Further optimized queries
- 
+
 == 2007-10-03 | 0.6.3 Beta ==
 
  * francois: Extended the cache coverage
@@ -30,7 +31,7 @@
 == 2007-09-25 | 0.6.2 Beta ==
 
  * francois: Improved security and credentials handling
- * francois: [Break BC] Added a new topic table 
+ * francois: [Break BC] Added a new topic table
  * francois: [Break BC] Refactored most of the code to be more extensible, performant and readable
  * francois: Added "New message to read" indicator in topics (distinct from topic views, because anonymous users must still increase the topic views)
  * francois: Better handling of post titles
@@ -43,7 +44,7 @@
  * francois: Added locked topic feature
  * francois: Added unit tests for forum and topic calculated fields
  * francois: Fixed forum and topic calculated fields
- 
+
 == 2007-09-07 | 0.6.1 Beta ==
 
  * francois: Optimized calculated fields in model
@@ -52,7 +53,7 @@
  * francois: Renamed sfBBPlugin to sfSimpleForumPlugin
  * francois: Fixed output escaping
  * superhaggis: Fixed typo in schema.yml
- 
+
 == 0.6.0 Alpha ==
 
  * francois: Major refactoring (breaks BC) but now the plugin is functional
@@ -60,7 +61,7 @@
 
 == 0.0.4 (not released)) ==
 
-* [3678] by superhaggis 
+* [3678] by superhaggis
   - Updated CHANGELOG.
   - Added new file entries to package.xml.
 * [3958] by superhaggis
@@ -88,7 +89,7 @@
 * [4016] by superhaggis
   - Added shortcut method to access post's creator.
   - Refactored getReplies() to implement shortcut.
-  - Replaced method calls in viewThread template. 
+  - Replaced method calls in viewThread template.
 * [4020] by superhaggis
   - Reformatted and updated CHANGELOG.
 
@@ -103,7 +104,7 @@
   - Added stripped_title column to sf_bb_post table.
   - Added additional rule for @sf_bb_viewforum route.
   - Created initial viewForumSuccess template.
-  - Created basic executeViewForum action. 
+  - Created basic executeViewForum action.
 
 == 0.0.2 ==
 
