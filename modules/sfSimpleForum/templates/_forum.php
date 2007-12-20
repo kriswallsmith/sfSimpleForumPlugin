@@ -2,7 +2,7 @@
 <tr>
   <td class="forum_name">
     <?php echo link_to($forum->getName(), 'sfSimpleForum/forum?forum_name='.$forum->getStrippedName()) ?><br />
-    <span class="forum_description"><?php echo simple_format_text($forum->getDescription()) ?></span>
+    <?php echo simple_format_text($forum->getDescription(), array('class' => 'forum_description')) ?>
   </td>
   <td class="forum_threads"><?php echo $forum->getNbTopics() ?></td>
   <td class="forum_posts"><?php echo $forum->getNbPosts() ?></td>
