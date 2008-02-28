@@ -24,7 +24,7 @@
     'display_post_link'   => true,
     'nb_posts'            => $forum->getNbPosts(),
     'post_rule'           => 'sfSimpleForum/forumLatestPosts?forum_name='.$forum->getStrippedName(),
-    'feed_rule'           => 'sfSimpleForum/latestForumPostsFeed?forum_name='.$forum->getStrippedName(),
+    'feed_rule'           => 'sfSimpleForum/forumLatestPostsFeed?forum_name='.$forum->getStrippedName(),
     'feed_title'          => $feed_title
   )) ?>
   
