@@ -224,6 +224,4 @@ all:
  * Moderators can edit a message
  * Moderators can move a topic to another forum and a message to another topic
  * Add images to make the default style less ugly
- * Search engine
  * Subscribe to a topic by email
- * Package with other plugins into an application

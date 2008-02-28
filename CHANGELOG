@@ -1,5 +1,7 @@
-== Trunk ==
+== 2008-02-28 | 0.6.6 Beta ==
 
+ * francois: Fixed broken link to feed (#2599)
+ * francois: Packaged with other plugins into an application (cf. http://www.motilee.com)
  * Pascal.Borreli : Fixed incorrect use of a block element inside a inline element (#2628)
  * nicolas: Slightly refactored pagination helper
  * nicolas: Removed dependency on sfGuardUser
