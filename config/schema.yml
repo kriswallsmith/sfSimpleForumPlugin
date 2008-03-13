@@ -21,8 +21,8 @@ propel:
     # performance enhancers
     stripped_name: { type: varchar, size: 255, index: unique }
     latest_post_id: { type: integer, foreignTable: sf_simple_forum_post, foreignReference: id, onDelete: setnull }
-    nb_posts:      bigint
-    nb_topics:     bigint
+    nb_posts:      integer
+    nb_topics:     integer
     
   sf_simple_forum_topic:
     _attributes:   { phpName: sfSimpleForumTopic, package: plugins.sfSimpleForumPlugin.lib.model }
@@ -37,8 +37,8 @@ propel:
     latest_post_id: { type: integer, foreignTable: sf_simple_forum_post, foreignReference: id, onDelete: setnull }
     user_id:       { type: integer, foreignTable: sf_guard_user, foreignReference: id, onDelete: setnull }
     stripped_title: varchar(255)
-    nb_posts:      { type: bigint, default: 0 }
-    nb_views:      { type: bigint, default: 0 }
+    nb_posts:      { type: integer, default: 0 }
+    nb_views:      { type: integer, default: 0 }
     
   sf_simple_forum_post:
     _attributes:   { phpName: sfSimpleForumPost, package: plugins.sfSimpleForumPlugin.lib.model }

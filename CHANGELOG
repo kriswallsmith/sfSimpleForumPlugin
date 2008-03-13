@@ -1,3 +1,7 @@
+== 2008-03-13 | Trunk ==
+
+ * francois: Changed counts types to integer
+
 == 2008-02-28 | 0.6.6 Beta ==
 
  * francois: Fixed broken link to feed (#2599)
