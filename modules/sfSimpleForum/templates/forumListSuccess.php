@@ -32,10 +32,10 @@
   <?php $category = '' ?>
   <table id="fora">
     <tr>
-      <th class="forum_name"><?php echo __('Forum') ?></td>
-      <th class="forum_threads"><?php echo __('Topics') ?></td>
-      <th class="forum_posts"><?php echo __('Messages') ?></td>
-      <th class="forum_recent"><?php echo __('Last Message') ?></td>
+      <th class="forum_name"><?php echo __('Forum') ?></th>
+      <th class="forum_threads"><?php echo __('Topics') ?></th>
+      <th class="forum_posts"><?php echo __('Messages') ?></th>
+      <th class="forum_recent"><?php echo __('Last Message') ?></th>
     </tr>
     <?php foreach ($forums as $forum): ?>
       <?php $new_category = $forum->getsfSimpleForumCategory()->getName() ?>
