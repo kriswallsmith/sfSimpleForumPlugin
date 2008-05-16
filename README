@@ -218,6 +218,11 @@ all:
   stylesheets: [-/sfSimpleForumPlugin/css/default.css, myCustomStylesheet]
 }}}
 
+=== I18N ===
+
+You can write own translations for this plugin by providing an `sfSimpleForum.XX.xml` file, whereas xx is the locale.
+If you are upgrading from version 0.6.5 or earlier and created a `messages.xx.xml` file for your translation, you need to rename it.
+
 == TODO ==
 
  * Authors can edit a message during its first minutes

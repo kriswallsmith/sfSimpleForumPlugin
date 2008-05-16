@@ -4,14 +4,14 @@
 <?php slot('forum_navigation') ?>
 <?php if ($forum): ?>
   <?php echo forum_breadcrumb(array(
-    array(__(sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums')), 'sfSimpleForum/forumList'),
+    array(__(sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums'), null, 'sfSimpleForum'), 'sfSimpleForum/forumList'),
     array($forum->getName(), 'sfSimpleForum/forum?forum_name='.$forum->getStrippedName()),
-    __('New topic')
+    __('New topic', null, 'sfSimpleForum')
   )) ?>
 <?php else: ?>
   <?php echo forum_breadcrumb(array(
     array(__(sfConfig::get('app_sfSimpleForumPlugin_forum_name', 'Forums')), 'sfSimpleForum/forumList'),
-    __('New topic')
+    __('New topic', null, 'sfSimpleForum')
   )) ?>
 <?php endif; ?>
 <?php end_slot() ?>
@@ -19,7 +19,7 @@
 
 <div class="sfSimpleForum">
 
-  <h1><?php echo __('Create a new topic') ?></h1>
+  <h1><?php echo __('Create a new topic', null, 'sfSimpleForum') ?></h1>
   
   <?php include_partial('sfSimpleForum/add_post_form', array('forum' => $forum)) ?>
 

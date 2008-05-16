@@ -1,11 +1,11 @@
 <table id="threads">
   <tr>
-    <th class="thread_name"><?php echo __('Topic') ?></th>
-    <th class="thread_replies"><?php echo __('Replies') ?></th>
+    <th class="thread_name"><?php echo __('Topic', null, 'sfSimpleForum') ?></th>
+    <th class="thread_replies"><?php echo __('Replies', null, 'sfSimpleForum') ?></th>
     <?php if (sfConfig::get('app_sfSimpleForumPlugin_count_views', true)): ?>
-    <th class="thread_replies"><?php echo __('Views') ?></th>
+    <th class="thread_replies"><?php echo __('Views', null, 'sfSimpleForum') ?></th>
     <?php endif; ?>
-    <th class="thread_recent"><?php echo __('Last Message') ?></th>
+    <th class="thread_recent"><?php echo __('Last Message', null, 'sfSimpleForum') ?></th>
   </tr>
   <?php foreach ($topics as $topic): ?>
     <?php include_partial('sfSimpleForum/topic', array(

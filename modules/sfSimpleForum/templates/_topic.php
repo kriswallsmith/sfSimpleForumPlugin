@@ -5,15 +5,15 @@
     <?php if ($topic->getIsSticked()): ?>
       <?php echo image_tag('/sfSimpleForumPlugin/images/note.png', array(
         'align' => 'absbottom',
-        'alt'   => __('Sticked topic'),
-        'title' => __('Sticked topic')
+        'alt'   => __('Sticked topic', null, 'sfSimpleForum'),
+        'title' => __('Sticked topic', null, 'sfSimpleForum')
       )) ?>
     <?php endif; ?>
     <?php if ($topic->getIsLocked()): ?>
       <?php echo image_tag('/sfSimpleForumPlugin/images/lock.png', array(
         'align' => 'absbottom',
-        'alt'   => __('Locked topic'),
-        'title' => __('Locked topic')
+        'alt'   => __('Locked topic', null, 'sfSimpleForum'),
+        'title' => __('Locked topic', null, 'sfSimpleForum')
       )) ?>
     <?php endif; ?>
     <?php if (!$topic->getIsLocked() && !$topic->getIsSticked()): ?>
@@ -53,15 +53,15 @@
   <?php endif; ?>
 
   <td class="thread_recent">
-    <?php $message_link = $topic->getNbReplies() ? __('Last reply') : __('Posted') ?>
+    <?php $message_link = $topic->getNbReplies() ? __('Last reply', null, 'sfSimpleForum') : __('Posted', null, 'sfSimpleForum') ?>
     <?php $latest_post = $topic->getsfSimpleForumPost() ?>
     <?php echo $message_link . ' ' . __('%date% ago by %author%', array(
       '%date%'   => distance_of_time_in_words($latest_post->getCreatedAt('U')),
       '%author%' => link_to(get_partial('sfSimpleForum/author_name', array('author' => $latest_post->getAuthorName(), 'sf_cache_key' => $latest_post->getAuthorName())), 'sfSimpleForum/userLatestPosts?username='.$latest_post->getAuthorName())
-      )) ?>
+      ), 'sfSimpleForum') ?>
 
     <?php if ($topic->getNbReplies()): ?>
-      (<?php echo link_to(__('view'), 'sfSimpleForum/post?id='.$topic->getLatestPostId()) ?>)
+      (<?php echo link_to(__('view', null, 'sfSimpleForum'), 'sfSimpleForum/post?id='.$topic->getLatestPostId()) ?>)
     <?php endif; ?>
 
   </td>

@@ -14,7 +14,7 @@
   <h1><?php echo $forum->getName() ?></h1>
 
   <ul class="forum_actions">
-    <li><?php echo link_to(__('New topic'), 'sfSimpleForum/createTopic?forum_name='.$forum->getStrippedName()) ?></li>
+    <li><?php echo link_to(__('New topic', null, 'sfSimpleForum'), 'sfSimpleForum/createTopic?forum_name='.$forum->getStrippedName()) ?></li>
   </ul>
   
   <?php include_partial('sfSimpleForum/figures', array(
@@ -34,7 +34,7 @@
     
     <?php echo pager_navigation($topic_pager, 'sfSimpleForum/forum?forum_name='.$forum->getStrippedName()) ?>    
   <?php else: ?>
-    <p><?php echo __('There is no topic in this discussion yet. Perhaps you would like to %start%?', array('%start%' =>  link_to(__('start a new one'), 'sfSimpleForum/createTopic?forum_name='.$forum->getStrippedName()))) ?></p>
+    <p><?php echo __('There is no topic in this discussion yet. Perhaps you would like to %start%?', array('%start%' =>  link_to(__('start a new one', null, 'sfSimpleForum'), 'sfSimpleForum/createTopic?forum_name='.$forum->getStrippedName())), 'sfSimpleForum') ?></p>
   <?php endif; ?>
 
 </div>

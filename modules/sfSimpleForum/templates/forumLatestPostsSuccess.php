@@ -1,5 +1,5 @@
 <?php use_helper('I18N', 'Pagination', 'sfSimpleForum') ?>
-<?php $title = __('Latest messages') ?>
+<?php $title = __('Latest messages', null, 'sfSimpleForum') ?>
 
 <?php if (sfConfig::get('app_sfSimpleForum_include_breadcrumb', true)): ?>
 <?php slot('forum_navigation') ?>

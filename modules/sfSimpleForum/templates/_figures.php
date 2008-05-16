@@ -8,13 +8,13 @@
 
   <?php echo link_to_if(
     $display_topic_link,
-    format_number_choice('[0]No topic yet|[1]One topic|(1,+Inf]%topics% topics', array('%topics%' => $nb_topics), $nb_topics),
+    format_number_choice('[0]No topic yet|[1]One topic|(1,+Inf]%topics% topics', array('%topics%' => $nb_topics), $nb_topics, 'sfSimpleForum'),
     $topic_rule
     ) ?>, 
 
   <?php echo link_to_if(
     $display_post_link,
-    format_number_choice('[0]No message|[1]One message|(1,+Inf]%posts% messages', array('%posts%' => $nb_posts), $nb_posts),
+    format_number_choice('[0]No message|[1]One message|(1,+Inf]%posts% messages', array('%posts%' => $nb_posts), $nb_posts, 'sfSimpleForum'),
     $post_rule
    ) ?>
 

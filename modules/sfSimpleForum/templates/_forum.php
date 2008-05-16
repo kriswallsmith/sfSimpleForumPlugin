@@ -13,7 +13,7 @@
       <?php echo __('%date% ago by %author%', array(
         '%date%'   => distance_of_time_in_words($latest_post->getCreatedAt('U')),
         '%author%' => link_to(get_partial('sfSimpleForum/author_name', array('author' => $latest_post->getAuthorName(), 'sf_cache_key' => $latest_post->getAuthorName())), 'sfSimpleForum/userLatestPosts?username='.$latest_post->getAuthorName())
-        )) ?>
+        ), 'sfSimpleForum') ?>
     <?php endif ;?>
   </td>
 </tr>

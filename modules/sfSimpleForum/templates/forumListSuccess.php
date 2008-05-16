@@ -14,7 +14,7 @@
   
   <?php if (sfConfig::get('app_sfSimpleForumPlugin_allow_new_topic_outside_forum', true)): ?>
   <ul class="forum_actions">
-    <li><?php echo link_to(__('New topic'), 'sfSimpleForum/createTopic') ?></li>
+    <li><?php echo link_to(__('New topic', null, 'sfSimpleForum'), 'sfSimpleForum/createTopic') ?></li>
   </ul>    
   <?php endif; ?>
   
@@ -32,10 +32,10 @@
   <?php $category = '' ?>
   <table id="fora">
     <tr>
-      <th class="forum_name"><?php echo __('Forum') ?></th>
-      <th class="forum_threads"><?php echo __('Topics') ?></th>
-      <th class="forum_posts"><?php echo __('Messages') ?></th>
-      <th class="forum_recent"><?php echo __('Last Message') ?></th>
+      <th class="forum_name"><?php echo __('Forum', null, 'sfSimpleForum') ?></th>
+      <th class="forum_threads"><?php echo __('Topics', null, 'sfSimpleForum') ?></th>
+      <th class="forum_posts"><?php echo __('Messages', null, 'sfSimpleForum') ?></th>
+      <th class="forum_recent"><?php echo __('Last Message', null, 'sfSimpleForum') ?></th>
     </tr>
     <?php foreach ($forums as $forum): ?>
       <?php $new_category = $forum->getsfSimpleForumCategory()->getName() ?>

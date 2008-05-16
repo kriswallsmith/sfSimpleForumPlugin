@@ -1,5 +1,5 @@
 <?php use_helper('I18N', 'Pagination', 'sfSimpleForum') ?>
-<?php $title = __('Messages by %user%', array('%user%' => get_partial('sfSimpleForum/author_name', array('author' => $user, 'sf_cache_key' => $username)))) ?>
+<?php $title = __('Messages by %user%', array('%user%' => get_partial('sfSimpleForum/author_name', array('author' => $user, 'sf_cache_key' => $username))), 'sfSimpleForum') ?>
 
 <?php if (sfConfig::get('app_sfSimpleForum_include_breadcrumb', true)): ?>
 <?php slot('forum_navigation') ?>

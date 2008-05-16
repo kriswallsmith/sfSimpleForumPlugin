@@ -1,5 +1,5 @@
 <?php use_helper('I18N', 'Pagination', 'sfSimpleForum') ?>
-<?php $title = __('Latest topics') ?>
+<?php $title = __('Latest topics', null, 'sfSimpleForum') ?>
 
 <?php if (sfConfig::get('app_sfSimpleForum_include_breadcrumb', true)): ?>
 <?php slot('forum_navigation') ?>
@@ -16,7 +16,7 @@
 
   <?php if (sfConfig::get('app_sfSimpleForumPlugin_allow_new_topic_outside_forum', true)): ?>
   <ul class="forum_actions">
-    <li><?php echo link_to(__('New topic'), 'sfSimpleForum/createTopic') ?></li>
+    <li><?php echo link_to(__('New topic', null, 'sfSimpleForum'), 'sfSimpleForum/createTopic') ?></li>
   </ul>    
   <?php endif; ?>
   
