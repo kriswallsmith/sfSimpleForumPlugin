@@ -142,6 +142,30 @@
         <source>Moderator</source>
         <target>Moderator</target>
       </trans-unit>
+      <trans-unit id="36">
+        <source>Latest topics</source>
+        <target>Neueste Themen</target
+      </trans-unit>
+      <trans-unit id="37">
+        <source>Sticked topic</source>
+        <target>Angepinntes Thema</target>
+      </trans-unit>
+      <trans-unit id="38">
+        <source>Latest messages</source>
+        <target>Neueste Einträge</target>
+      </trans-unit>
+      <trans-unit id="39">
+        <source>Next</source>
+        <target>Weiter</target>
+      </trans-unit>
+      <trans-unit id="40">
+        <source>Previous</source>
+        <target>Zurück</target>
+      </trans-unit>
+      <trans-unit id="41">
+        <source>[1]1 message|(1,+Inf] %1% messages</source>
+        <target>[1]1 Eintrag|(1,+Inf] %1% Einträge</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

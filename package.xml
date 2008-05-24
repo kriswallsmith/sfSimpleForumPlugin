@@ -83,6 +83,10 @@ http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
            <file role="data" name="security.yml" />
            <file role="data" name="view.yml" />
          </dir>
+         <dir name="i18n">
+           <file role="data" name="sfSimpleForum.de.xml" />
+           <file role="data" name="sfSimpleForum.es.xml" />
+         </dir>
          <dir name="lib">
            <file role="data" name="BasesfSimpleForumActions.class.php" />
            <file role="data" name="BasesfSimpleForumComponents.class.php" />
