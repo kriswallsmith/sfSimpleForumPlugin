@@ -1,188 +1,340 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.4.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" 
-xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd 
-http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
- <name>sfSimpleForumPlugin</name>
- <channel>pear.symfony-project.com</channel>
- <summary>Lightweight embedded forum plugin.</summary>
- <description>A simple embedded forum for Symfony applications.</description>
- <lead>
-  <name>Francois Zaninotto</name>
-  <user>fzaninotto</user>
-  <email>francois.zaninotto@symfony-project.com</email>
-  <active>yes</active>
- </lead>
- <date>2008-02-28</date>
- <version>
-   <release>0.6.6</release>
-   <api>0.6.6</api>
- </version>
- <stability>
-  <release>beta</release>
-  <api>beta</api>
- </stability>
- <license uri="http://www.symfony-project.com/license">MIT license</license>
- <notes>-</notes>
- <contents>
-   <dir name="/">
-     <file role="data" name="CHANGELOG" />
-     <file role="data" name="README" />
-     <file role="data" name="LICENSE" />
-
-     <dir name="config">
-       <file role="data" name="schema.yml" />
-     </dir>
-
-     <dir name="data">
-       <dir name="fixtures">
-         <file role="data" name="fixtures.yml" />
-       </dir>
-     </dir>
-
-     <dir name="lib">
-       <dir name="helper">
-         <file role="data" name="PaginationHelper.php" />
-         <file role="data" name="sfSimpleForumHelper.php" />
-       </dir>
-       <dir name="model">
-         <dir name="plugin">
-           <file role="data" name="PluginsfSimpleForumCategory.php" />
-           <file role="data" name="PluginsfSimpleForumCategoryPeer.php" />
-           <file role="data" name="PluginsfSimpleForumForum.php" />
-           <file role="data" name="PluginsfSimpleForumForumPeer.php" />
-           <file role="data" name="PluginsfSimpleForumPost.php" />
-           <file role="data" name="PluginsfSimpleForumPostPeer.php" />
-           <file role="data" name="PluginsfSimpleForumTopic.php" />
-           <file role="data" name="PluginsfSimpleForumTopicPeer.php" />
-           <file role="data" name="PluginsfSimpleForumTopicView.php" />
-           <file role="data" name="PluginsfSimpleForumTopicViewPeer.php" />
-         </dir>
-         <file role="data" name="sfSimpleForumCategory.php" />
-         <file role="data" name="sfSimpleForumCategoryPeer.php" />
-         <file role="data" name="sfSimpleForumForum.php" />
-         <file role="data" name="sfSimpleForumForumPeer.php" />
-         <file role="data" name="sfSimpleForumPost.php" />
-         <file role="data" name="sfSimpleForumPostPeer.php" />
-         <file role="data" name="sfSimpleForumTopic.php" />
-         <file role="data" name="sfSimpleForumTopicPeer.php" />
-         <file role="data" name="sfSimpleForumTopicView.php" />
-         <file role="data" name="sfSimpleForumTopicViewPeer.php" />
-       </dir>
-       <file role="data" name="sfSimpleForumTools.class.php" />
-     </dir>
-
-     <dir name="modules">
-       <dir name="sfSimpleForum">
-         <dir name="actions">
-           <file role="data" name="actions.class.php" />
-           <file role="data" name="components.class.php" />
-         </dir>
-         <dir name="config">
-           <file role="data" name="cache.yml" />
-           <file role="data" name="security.yml" />
-           <file role="data" name="view.yml" />
-         </dir>
-         <dir name="i18n">
-           <file role="data" name="sfSimpleForum.de.xml" />
-           <file role="data" name="sfSimpleForum.es.xml" />
-         </dir>
-         <dir name="lib">
-           <file role="data" name="BasesfSimpleForumActions.class.php" />
-           <file role="data" name="BasesfSimpleForumComponents.class.php" />
-         </dir>
-         <dir name="templates">
-           <file role="data" name="_add_post_form.php" />
-           <file role="data" name="_author.php" />
-           <file role="data" name="_author_name.php" />
-           <file role="data" name="_figures.php" />
-           <file role="data" name="_forum.php" />
-           <file role="data" name="_latestPosts.php" />
-           <file role="data" name="_post.php" />
-           <file role="data" name="_post_list.php" />
-           <file role="data" name="_post_moderator_actions.php" />
-           <file role="data" name="_topic.php" />
-           <file role="data" name="_topic_list.php" />
-           <file role="data" name="_topic_moderator_actions.php" />
-           <file role="data" name="createTopicSuccess.php" />
-           <file role="data" name="forumLatestPostsSuccess.php" />
-           <file role="data" name="forumListSuccess.php" />
-           <file role="data" name="forumSuccess.php" />
-           <file role="data" name="latestPostsSuccess.php" />
-           <file role="data" name="latestTopicsSuccess.php" />
-           <file role="data" name="topicSuccess.php" />
-           <file role="data" name="userLatestPostsSuccess.php" />
-           <file role="data" name="userLatestTopicsSuccess.php" />
-         </dir>
-         <dir name="validate">
-           <file role="data" name="addPost.yml" />
-           <file role="data" name="addTopic.yml" />
-         </dir>
-       </dir>
-       <dir name="sfSimpleForumCategoryAdmin">
-         <dir name="actions">
-           <file role="data" name="actions.class.php" />
-         </dir>
-         <dir name="config">
-           <file role="data" name="generator.yml" />
-           <file role="data" name="view.yml" />
-         </dir>
-         <dir name="templates">
-           <file role="data" name="_forums.php" />
-         </dir>
-       </dir>
-       <dir name="sfSimpleForumForumAdmin">
-         <dir name="actions">
-           <file role="data" name="actions.class.php" />
-         </dir>
-         <dir name="config">
-           <file role="data" name="generator.yml" />
-           <file role="data" name="view.yml" />
-         </dir>
-         <dir name="templates">
-           <file role="data" name="_category.php" />
-         </dir>
-       </dir>
-       
-     </dir>
-
-     <dir name="web">
-       <dir name="css">
-         <file role="data" name="default.css" />
-       </dir>
-       <dir name="images">
-         <file role="data" name="button_bg.gif" />
-         <file role="data" name="comment.png" />
-         <file role="data" name="comments.png" />
-         <file role="data" name="feed-icon.png" />
-         <file role="data" name="lock.png" />
-         <file role="data" name="note.png" />
-         <file role="data" name="th_bg.gif" />
-       </dir>
-     </dir>
-   </dir>
- </contents>
-
- <dependencies>
-  <required>
-   <php>
-    <min>5.0.0</min>
-   </php>
-   <pearinstaller>
-    <min>1.4.1</min>
-   </pearinstaller>
-   <package>
-    <name>symfony</name>
-    <channel>pear.symfony-project.com</channel>
-    <min>1.0.0</min>
-    <max>1.1.0</max>
-   </package>
-  </required>
- </dependencies>
-
- <phprelease>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.4.1" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd  http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+  <name>sfSimpleForumPlugin</name>
+  <channel>pear.symfony-project.com</channel>
+  <summary>Lightweight embedded forum plugin.</summary>
+  <description>A simple embedded forum for Symfony applications.</description>
+  <lead>
+    <name>Francois Zaninotto</name>
+    <user>fzaninotto</user>
+    <email>francois.zaninotto@symfony-project.com</email>
+    <active>yes</active>
+  </lead>
+  <date>2008-09-23</date>
+  <version>
+    <release>0.6.7</release>
+    <api>0.6.7</api>
+  </version>
+  <stability>
+    <release>beta</release>
+    <api>beta</api>
+  </stability>
+  <license uri="http://www.symfony-project.com/license">MIT license</license>
+  <notes>-</notes>
+  <contents>
+    <dir name="/">
+      <file role="data" name="README"/>
+      <file role="data" name="LICENSE"/>
+      <dir name="config">
+        <file role="data" name="schema.yml"/>
+      </dir>
+      <dir name="data">
+        <dir name="fixtures">
+          <file role="data" name="fixtures.yml"/>
+        </dir>
+      </dir>
+      <dir name="lib">
+        <dir name="helper">
+          <file role="data" name="PaginationHelper.php"/>
+          <file role="data" name="sfSimpleForumHelper.php"/>
+        </dir>
+        <dir name="model">
+          <dir name="plugin">
+            <file role="data" name="PluginsfSimpleForumCategory.php"/>
+            <file role="data" name="PluginsfSimpleForumCategoryPeer.php"/>
+            <file role="data" name="PluginsfSimpleForumForum.php"/>
+            <file role="data" name="PluginsfSimpleForumForumPeer.php"/>
+            <file role="data" name="PluginsfSimpleForumPost.php"/>
+            <file role="data" name="PluginsfSimpleForumPostPeer.php"/>
+            <file role="data" name="PluginsfSimpleForumTopic.php"/>
+            <file role="data" name="PluginsfSimpleForumTopicPeer.php"/>
+            <file role="data" name="PluginsfSimpleForumTopicView.php"/>
+            <file role="data" name="PluginsfSimpleForumTopicViewPeer.php"/>
+          </dir>
+          <file role="data" name="sfSimpleForumCategory.php"/>
+          <file role="data" name="sfSimpleForumCategoryPeer.php"/>
+          <file role="data" name="sfSimpleForumForum.php"/>
+          <file role="data" name="sfSimpleForumForumPeer.php"/>
+          <file role="data" name="sfSimpleForumPost.php"/>
+          <file role="data" name="sfSimpleForumPostPeer.php"/>
+          <file role="data" name="sfSimpleForumTopic.php"/>
+          <file role="data" name="sfSimpleForumTopicPeer.php"/>
+          <file role="data" name="sfSimpleForumTopicView.php"/>
+          <file role="data" name="sfSimpleForumTopicViewPeer.php"/>
+        </dir>
+        <file role="data" name="sfSimpleForumTools.class.php"/>
+      </dir>
+      <dir name="modules">
+        <dir name="sfSimpleForum">
+          <dir name="actions">
+            <file role="data" name="actions.class.php"/>
+            <file role="data" name="components.class.php"/>
+          </dir>
+          <dir name="config">
+            <file role="data" name="cache.yml"/>
+            <file role="data" name="security.yml"/>
+            <file role="data" name="view.yml"/>
+          </dir>
+          <dir name="i18n">
+            <file role="data" name="sfSimpleForum.de.xml"/>
+            <file role="data" name="sfSimpleForum.es.xml"/>
+          </dir>
+          <dir name="lib">
+            <file role="data" name="BasesfSimpleForumActions.class.php"/>
+            <file role="data" name="BasesfSimpleForumComponents.class.php"/>
+          </dir>
+          <dir name="templates">
+            <file role="data" name="_add_post_form.php"/>
+            <file role="data" name="_author.php"/>
+            <file role="data" name="_author_name.php"/>
+            <file role="data" name="_figures.php"/>
+            <file role="data" name="_forum.php"/>
+            <file role="data" name="_latestPosts.php"/>
+            <file role="data" name="_post.php"/>
+            <file role="data" name="_post_list.php"/>
+            <file role="data" name="_post_moderator_actions.php"/>
+            <file role="data" name="_topic.php"/>
+            <file role="data" name="_topic_list.php"/>
+            <file role="data" name="_topic_moderator_actions.php"/>
+            <file role="data" name="createTopicSuccess.php"/>
+            <file role="data" name="forumLatestPostsSuccess.php"/>
+            <file role="data" name="forumListSuccess.php"/>
+            <file role="data" name="forumSuccess.php"/>
+            <file role="data" name="latestPostsSuccess.php"/>
+            <file role="data" name="latestTopicsSuccess.php"/>
+            <file role="data" name="topicSuccess.php"/>
+            <file role="data" name="userLatestPostsSuccess.php"/>
+            <file role="data" name="userLatestTopicsSuccess.php"/>
+          </dir>
+          <dir name="validate">
+            <file role="data" name="addPost.yml"/>
+            <file role="data" name="addTopic.yml"/>
+          </dir>
+        </dir>
+        <dir name="sfSimpleForumCategoryAdmin">
+          <dir name="actions">
+            <file role="data" name="actions.class.php"/>
+          </dir>
+          <dir name="config">
+            <file role="data" name="generator.yml"/>
+            <file role="data" name="view.yml"/>
+          </dir>
+          <dir name="templates">
+            <file role="data" name="_forums.php"/>
+          </dir>
+        </dir>
+        <dir name="sfSimpleForumForumAdmin">
+          <dir name="actions">
+            <file role="data" name="actions.class.php"/>
+          </dir>
+          <dir name="config">
+            <file role="data" name="generator.yml"/>
+            <file role="data" name="view.yml"/>
+          </dir>
+          <dir name="templates">
+            <file role="data" name="_category.php"/>
+          </dir>
+        </dir>
+      </dir>
+      <dir name="web">
+        <dir name="css">
+          <file role="data" name="default.css"/>
+        </dir>
+        <dir name="images">
+          <file role="data" name="button_bg.gif"/>
+          <file role="data" name="comment.png"/>
+          <file role="data" name="comments.png"/>
+          <file role="data" name="feed-icon.png"/>
+          <file role="data" name="lock.png"/>
+          <file role="data" name="note.png"/>
+          <file role="data" name="th_bg.gif"/>
+        </dir>
+      </dir>
+    </dir>
+  </contents>
+  <dependencies>
+    <required>
+      <php>
+        <min>5.0.0</min>
+      </php>
+      <pearinstaller>
+        <min>1.4.1</min>
+      </pearinstaller>
+      <package>
+        <name>symfony</name>
+        <channel>pear.symfony-project.com</channel>
+        <min>1.0.0</min>
+        <max>1.1.0</max>
+        <exclude>1.1.0</exclude>
+      </package>
+    </required>
+  </dependencies>
+  <phprelease>
  </phprelease>
-
- <changelog>
- </changelog>
+  <changelog>
+    <release>
+      <version>
+        <release>0.6.7</release>
+        <api>0.6.7</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2008-09-23</date>
+      <license>MIT</license>
+      <notes>
+       * francois: Translated README to Markdown
+       * francois: Changed counts types to integer
+     </notes>
+    </release>
+    <release>
+      <version>
+        <release>0.6.6</release>
+        <api>0.6.6</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2008-02-28</date>
+      <license>MIT</license>
+      <notes>
+       * francois: Fixed broken link to feed (#2599)
+       * francois: Packaged with other plugins into an application (cf. http://www.motilee.com)
+       * Pascal.Borreli : Fixed incorrect use of a block element inside a inline element (#2628)
+       * nicolas: Slightly refactored pagination helper
+       * nicolas: Removed dependency on sfGuardUser
+     </notes>
+    </release>
+    <release>
+      <version>
+        <release>0.6.5</release>
+        <api>0.6.5</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2007-11-08</date>
+      <license>MIT</license>
+      <notes>
+       * francois: Added two modules for backend administration
+       * francois: Removed schema configuration file (use sfPropelAlternativeSchemaPlugin if you must customize the schema)
+       * francois: Added a supplementary customization layer to the model classes
+     </notes>
+    </release>
+    <release>
+      <version>
+        <release>0.6.4</release>
+        <api>0.6.4</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2007-10-10</date>
+      <license>MIT</license>
+      <notes>
+       * francois: Fixed missing files in package definition (#2336)
+       * francois: Fixed empty forums do not appear in the forum list (#2330)
+       * francois: Added a new partial to allow third-party profile enhancements
+       * francois: Further optimized queries
+     </notes>
+    </release>
+    <release>
+      <version>
+        <release>0.6.3</release>
+        <api>0.6.3</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2007-10-03</date>
+      <license>MIT</license>
+      <notes>
+       * francois: Extended the cache coverage
+       * francois: Partialized templates for easier customization
+       * francois: Refactored Forum and Topic counts (now working with save and delete)
+       * francois: Made the schema customizable
+       * francois: Added link to last page for multi-pages topics
+       * francois: Refactored actions class for easier custom templating
+       * francois: Fixed topic feed
+       * francois: Added a topic list (for all forums, for one user) and related feeds
+     </notes>
+    </release>
+    <release>
+      <version>
+        <release>0.6.2</release>
+        <api>0.6.2</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2007-09-25</date>
+      <license>MIT</license>
+      <notes>
+       * francois: Improved security and credentials handling
+       * francois: [Break BC] Added a new topic table
+       * francois: [Break BC] Refactored most of the code to be more extensible, performant and readable
+       * francois: Added "New message to read" indicator in topics (distinct from topic views, because anonymous users must still increase the topic views)
+       * francois: Better handling of post titles
+       * francois: Refactored the way a forum knows about its last post
+       * francois: Simplified the interface (removed buttons, lessened clicks)
+       * francois: Added latest posts component
+       * francois: Fixed page displayed after adding a message doesn't use pagination
+       * francois: Added a new getMessage() action
+       * francois: Switched icon set to famfamfam as I couldn't find where the sticky one came from
+       * francois: Added locked topic feature
+       * francois: Added unit tests for forum and topic calculated fields
+       * francois: Fixed forum and topic calculated fields
+     </notes>
+    </release>
+    <release>
+      <version>
+        <release>0.6.1</release>
+        <api>0.6.1</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2007-09-07</date>
+      <license>MIT</license>
+      <notes>
+       * francois: Optimized calculated fields in model
+       * beleneglorion: Added sticky topic feature
+       * francois: Added View count on topics
+       * francois: Renamed sfBBPlugin to sfSimpleForumPlugin
+       * francois: Fixed output escaping
+       * superhaggis: Fixed typo in schema.yml
+     </notes>
+    </release>
+    <release>
+      <version>
+        <release>0.6.0</release>
+        <api>0.6.0</api>
+      </version>
+      <stability>
+        <release>alpha</release>
+        <api>alpha</api>
+      </stability>
+      <license uri="http://www.symfony-project.com/license">MIT license</license>
+      <date>2007-09-07</date>
+      <license>MIT</license>
+      <notes>
+       * francois: Major refactoring from sfBBPlugin (breaks BC) but now the plugin is functional
+       * francois: Removed the unimplemented parts
+     </notes>
+    </release>
+  </changelog>
 </package>
